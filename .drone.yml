@@ -4,9 +4,6 @@ pipeline:
     image: node:8
     secrets:
       - npm_auth_token
-    environment:
-      - POSTGRES_USER=asl-test
-      - POSTGRES_HOST=database
     commands:
       - npm install
       - npm test
