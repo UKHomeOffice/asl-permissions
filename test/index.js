@@ -36,6 +36,12 @@ describe('API', () => {
       this.app = User(this.api, user);
     });
 
+    it('returns 403 for unknown tasks', () => {
+      return supertest(this.app)
+        .get('/not-a-task')
+        .expect(403);
+    });
+
     it('returns 403 for tasks which do not have "owner" as a role', () => {
       return supertest(this.app)
         .get('/task2')
@@ -70,6 +76,12 @@ describe('API', () => {
         get: prop => null // user has no establishment
       };
       this.app = User(this.api, user);
+    });
+
+    it('returns 403 for unknown tasks', () => {
+      return supertest(this.app)
+        .get('/not-a-task')
+        .expect(403);
     });
 
     it('returns 403 for tasks which do not have "inspector" as a role', () => {
