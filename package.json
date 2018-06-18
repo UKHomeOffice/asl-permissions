@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/UKHomeOffice/asl-permissions#readme",
   "dependencies": {
-    "@asl/service": "^2.7.0",
+    "@asl/service": "^3.0.0",
     "lodash": "^4.17.10"
   },
   "devDependencies": {
