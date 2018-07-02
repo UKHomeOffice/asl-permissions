@@ -7,21 +7,18 @@ module.exports = {
     secret: process.env.KEYCLOAK_SECRET
   },
   permissions: {
+    place: {
+      create: ['inspector', 'owner'],
+      update: ['inspector', 'owner'],
+      delete: ['inspector', 'owner']
+    },
     project: {
-      read: {
-        roles: ['inspector', 'owner']
-      },
-      list: {
-        roles: ['inspector', 'owner']
-      }
+      read: ['inspector', 'owner'],
+      list: ['inspector', 'owner']
     },
     establishment: {
-      read: {
-        roles: ['inspector', 'owner']
-      },
-      list: {
-        roles: ['inspector']
-      }
+      read: ['inspector', 'owner'],
+      list: ['inspector']
     }
   }
 };

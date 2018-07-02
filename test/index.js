@@ -11,16 +11,10 @@ describe('API', () => {
         level: 'silent'
       },
       permissions: {
-        task1: {
-          roles: ['owner']
-        },
-        task2: {
-          roles: ['inspector']
-        },
+        task1: ['owner'],
+        task2: ['inspector'],
         task3: {
-          task3a: {
-            roles: ['owner', 'inspector']
-          }
+          task3a: ['owner', 'inspector']
         }
       }
     });
