@@ -1,4 +1,5 @@
 const supertest = require('supertest');
+const sinon = require('sinon');
 
 const API = require('../lib/api');
 const User = require('./helpers/user-wrapper.js');
@@ -11,23 +12,34 @@ describe('API', () => {
         level: 'silent'
       },
       permissions: {
-        task1: ['owner'],
+        task1: ['establishment:admin'],
         task2: ['inspector'],
         task3: {
-          task3a: ['owner', 'inspector']
+          task3a: ['establishment:admin', 'establishment:readonly', 'establishment:basic', 'inspector']
         }
       }
     });
   });
 
-  describe('when user is an establishment user', () => {
+  afterEach(() => {
+    this.api.db.close();
+  });
+
+  describe('when user is an establishment admin', () => {
 
     beforeEach(() => {
-      const user = {
-        is: () => false, // user has no roles
-        get: prop => prop === 'establishment' && '100' // user is from establishment id 100
-      };
+      const user = { id: '100' };
       this.app = User(this.api, user);
+      sinon.stub(this.api.db.Profile, 'findOne').resolves({
+        establishments: [
+          {
+            id: '100',
+            permission: {
+              role: 'admin'
+            }
+          }
+        ]
+      });
     });
 
     it('returns 403 for unknown tasks', () => {
@@ -36,25 +48,25 @@ describe('API', () => {
         .expect(403);
     });
 
-    it('returns 403 for tasks which do not have "owner" as a role', () => {
+    it('returns 403 for tasks which do not have "establishment:admin" as a role', () => {
       return supertest(this.app)
         .get('/task2')
         .expect(403);
     });
 
-    it('returns 403 for tasks which have "owner" as a role when called for a different establishment', () => {
+    it('returns 403 for tasks which have "establishment:admin" as a role when called for a different establishment', () => {
       return supertest(this.app)
         .get('/task1?establishment=101')
         .expect(403);
     });
 
-    it('returns 200 for tasks which have "owner" as a role when called with the users establishment', () => {
+    it('returns 200 for tasks which have "establishment:admin" as a role when called with the users establishment', () => {
       return supertest(this.app)
         .get('/task1?establishment=100')
         .expect(200);
     });
 
-    it('returns 200 for tasks which have "owner" as one of multiple roles', () => {
+    it('returns 200 for tasks which have "establishment:admin" as one of multiple roles', () => {
       return supertest(this.app)
         .get('/task3.task3a?establishment=100')
         .expect(200);
@@ -62,7 +74,38 @@ describe('API', () => {
 
   });
 
-  describe('when user is an inspector', () => {
+  describe('when user is an establishment basic user', () => {
+
+    beforeEach(() => {
+      const user = { id: '100' };
+      this.app = User(this.api, user);
+      sinon.stub(this.api.db.Profile, 'findOne').resolves({
+        establishments: [
+          {
+            id: '100',
+            permission: {
+              role: 'basic'
+            }
+          }
+        ]
+      });
+    });
+
+    it('returns 403 for tasks which have "establishment:admin" as a role', () => {
+      return supertest(this.app)
+        .get('/task1?establishment=100')
+        .expect(403);
+    });
+
+    it('returns 200 for tasks which have "establishment:basic" as one of multiple roles', () => {
+      return supertest(this.app)
+        .get('/task3.task3a?establishment=100')
+        .expect(200);
+    });
+
+  });
+
+  xdescribe('when user is an inspector', () => {
 
     beforeEach(() => {
       const user = {
