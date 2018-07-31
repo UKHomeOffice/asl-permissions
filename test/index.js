@@ -4,6 +4,14 @@ const sinon = require('sinon');
 const API = require('../lib/api');
 const User = require('./helpers/user-wrapper.js');
 
+const stubProfile = (Profile, response) => {
+  const q = {
+    where: () => q,
+    eager: () => Promise.resolve([response])
+  };
+  sinon.stub(Profile, 'query').returns(q);
+};
+
 describe('API', () => {
 
   beforeEach(() => {
@@ -22,7 +30,9 @@ describe('API', () => {
   });
 
   afterEach(() => {
-    this.api.db.close();
+    try {
+      this.api.db.Profile.query.restore();
+    } catch (e) {}
   });
 
   describe('when user is an establishment admin', () => {
@@ -30,7 +40,7 @@ describe('API', () => {
     beforeEach(() => {
       const user = { id: '100' };
       this.app = User(this.api, user);
-      sinon.stub(this.api.db.Profile, 'findOne').resolves({
+      stubProfile(this.api.db.Profile, {
         establishments: [
           {
             id: '100',
@@ -79,7 +89,7 @@ describe('API', () => {
     beforeEach(() => {
       const user = { id: '100' };
       this.app = User(this.api, user);
-      sinon.stub(this.api.db.Profile, 'findOne').resolves({
+      stubProfile(this.api.db.Profile, {
         establishments: [
           {
             id: '100',
