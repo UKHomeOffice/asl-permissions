@@ -11,3 +11,23 @@
       secret: true
       name: asl-dev-auth
       key: secret
+    DATABASE_HOST:
+      secret: true
+      name: asl-dev-rds
+      key: endpoint
+    DATABASE_NAME:
+      secret: true
+      name: asl-dev-rds
+      key: db_name
+    DATABASE_USERNAME:
+      secret: true
+      name: asl-dev-rds
+      key: username
+    DATABASE_PASSWORD:
+      secret: true
+      name: asl-dev-rds
+      key: password
+    DATABASE_PORT:
+      secret: true
+      name: asl-dev-rds
+      key: port
