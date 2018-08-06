@@ -44,9 +44,7 @@ describe('API', () => {
         establishments: [
           {
             id: '100',
-            permission: {
-              role: 'admin'
-            }
+            role: 'admin'
           }
         ]
       });
@@ -93,9 +91,7 @@ describe('API', () => {
         establishments: [
           {
             id: '100',
-            permission: {
-              role: 'basic'
-            }
+            role: 'basic'
           }
         ]
       });
