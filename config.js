@@ -19,6 +19,9 @@ module.exports = {
       update: ['inspector', 'establishment:admin'],
       delete: ['inspector', 'establishment:admin']
     },
+    profile: {
+      invite: ['establishment:admin']
+    },
     project: {
       read: ['inspector', 'establishment:readonly', 'establishment:admin'],
       list: ['inspector', 'establishment:readonly', 'establishment:admin']
