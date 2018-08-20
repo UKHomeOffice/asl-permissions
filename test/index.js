@@ -16,6 +16,7 @@ describe('API', () => {
 
   beforeEach(() => {
     this.api = API({
+      db: {},
       log: {
         level: 'silent'
       },
@@ -43,17 +44,17 @@ describe('API', () => {
       stubProfile(this.api.db.Profile, {
         establishments: [
           {
-            id: '100',
+            id: 100,
             role: 'admin'
           }
         ]
       });
     });
 
-    it('returns 403 for unknown tasks', () => {
+    it('returns 404 for unknown tasks', () => {
       return supertest(this.app)
         .get('/not-a-task')
-        .expect(403);
+        .expect(404);
     });
 
     it('returns 403 for tasks which do not have "establishment:admin" as a role', () => {
@@ -90,7 +91,7 @@ describe('API', () => {
       stubProfile(this.api.db.Profile, {
         establishments: [
           {
-            id: '100',
+            id: 100,
             role: 'basic'
           }
         ]
