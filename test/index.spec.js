@@ -1,5 +1,6 @@
 const supertest = require('supertest');
 const sinon = require('sinon');
+const assert = require('assert');
 
 const API = require('../lib/api');
 const User = require('./helpers/user-wrapper.js');
@@ -152,6 +153,63 @@ describe('API', () => {
         .expect(200);
     });
 
+  });
+
+  describe('getTasks', () => {
+    beforeEach(() => {
+      const user = { id: '100' };
+      this.app = User(this.api, user);
+    });
+
+    it('returns a list of actions the user can perform', () => {
+      stubProfile(this.api.db.Profile, {
+        establishments: [
+          {
+            id: 100,
+            role: 'basic'
+          }
+        ]
+      });
+      return supertest(this.app)
+        .get('/')
+        .expect(200)
+        .expect(response => {
+          assert.deepEqual(response.body, {
+            100: [
+              'task3.task3a'
+            ]
+          });
+        });
+    });
+
+    it('scopes to an establishment', () => {
+      stubProfile(this.api.db.Profile, {
+        establishments: [
+          {
+            id: 100,
+            role: 'basic'
+          },
+          {
+            id: 101,
+            role: 'admin'
+          },
+          {
+            id: 102,
+            role: 'readonly'
+          }
+        ]
+      });
+      return supertest(this.app)
+        .get('/')
+        .expect(200)
+        .expect(response => {
+          assert.deepEqual(response.body, {
+            100: ['task3.task3a'],
+            101: ['task1', 'task3.task3a'],
+            102: ['task3.task3a']
+          });
+        });
+    });
   });
 
 });

@@ -15,6 +15,7 @@ module.exports = {
   },
   permissions: {
     place: {
+      read: ['establishment:admin', 'establishment:readonly'],
       create: ['inspector', 'establishment:admin'],
       update: ['inspector', 'establishment:admin'],
       delete: ['inspector', 'establishment:admin']
