@@ -15,16 +15,23 @@ module.exports = {
   },
   permissions: {
     place: {
+      read: ['establishment:admin', 'establishment:read'],
       create: ['inspector', 'establishment:admin'],
       update: ['inspector', 'establishment:admin'],
       delete: ['inspector', 'establishment:admin']
     },
     profile: {
-      invite: ['establishment:admin']
+      invite: ['establishment:admin'],
+      read: {
+        all: ['establishment:admin', 'establishment:read'],
+        basic: ['establishment:*']
+      }
     },
     project: {
-      read: ['inspector', 'establishment:readonly', 'establishment:admin'],
-      list: ['inspector', 'establishment:readonly', 'establishment:admin']
+      read: {
+        all: ['establishment:admin', 'establishment:read'],
+        basic: ['establishment:*']
+      }
     },
     establishment: {
       read: ['inspector', 'establishment:*'],
