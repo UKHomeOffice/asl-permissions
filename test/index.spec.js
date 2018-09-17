@@ -127,23 +127,23 @@ describe('API', () => {
         }
       });
 
-      const user = { id: '123' };
+      const user = { id: '3076871b-0aa7-4890-abbc-9e12c7c4af84' };
 
       this.app = User(this.api, user);
       stubProfile(this.api.db.Profile, {
-        id: '123'
+        id: '3076871b-0aa7-4890-abbc-9e12c7c4af84'
       });
     });
 
     it('allows if own profile', () => {
       return supertest(this.app)
-        .get('/profile.update?id=123')
+        .get('/profile.update?id=3076871b-0aa7-4890-abbc-9e12c7c4af84')
         .expect(200);
     });
 
     it('doesn\'t allow if different profile', () => {
       return supertest(this.app)
-        .get('/profile.update?id=321')
+        .get('/profile.update?id=e92b7efd-ebf3-449e-93e8-8fc1eee55da3')
         .expect(403);
     });
   });
