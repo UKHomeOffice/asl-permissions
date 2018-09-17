@@ -25,7 +25,8 @@ module.exports = {
       read: {
         all: ['establishment:admin', 'establishment:read'],
         basic: ['establishment:*']
-      }
+      },
+      update: ['profile:own']
     },
     project: {
       read: {
