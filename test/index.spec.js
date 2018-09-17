@@ -113,6 +113,41 @@ describe('API', () => {
 
   });
 
+  describe('profile:own permissions', () => {
+    beforeEach(() => {
+      this.api = API({
+        db: {},
+        log: {
+          level: 'silent'
+        },
+        permissions: {
+          profile: {
+            update: ['profile:own']
+          }
+        }
+      });
+
+      const user = { id: '123' };
+
+      this.app = User(this.api, user);
+      stubProfile(this.api.db.Profile, {
+        id: '123'
+      });
+    });
+
+    it('allows if own profile', () => {
+      return supertest(this.app)
+        .get('/profile.update?id=123')
+        .expect(200);
+    });
+
+    it('doesn\'t allow if different profile', () => {
+      return supertest(this.app)
+        .get('/profile.update?id=321')
+        .expect(403);
+    });
+  });
+
   xdescribe('when user is an inspector', () => {
 
     beforeEach(() => {
