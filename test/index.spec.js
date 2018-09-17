@@ -114,9 +114,9 @@ describe('API', () => {
   });
 
   describe('profile:own permissions', () => {
-    
+
     const id = '3076871b-0aa7-4890-abbc-9e12c7c4af84';
-    
+
     beforeEach(() => {
       this.api = API({
         db: {},
