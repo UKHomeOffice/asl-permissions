@@ -208,11 +208,10 @@ describe('API', () => {
         .get('/')
         .expect(200)
         .expect(response => {
-          assert.deepEqual(response.body, {
-            100: [
-              'task3.task3a'
-            ]
-          });
+          assert(response.body.hasOwnProperty(100), 'response contains a section for establishment `100`');
+          assert.deepEqual(response.body[100], [
+            'task3.task3a'
+          ]);
         });
     });
 
@@ -237,11 +236,29 @@ describe('API', () => {
         .get('/')
         .expect(200)
         .expect(response => {
-          assert.deepEqual(response.body, {
-            100: ['task3.task3a'],
-            101: ['task1', 'task3.task3a'],
-            102: ['task3.task3a']
-          });
+          assert(response.body.hasOwnProperty(100), 'response contains a section for establishment `100`');
+          assert(response.body.hasOwnProperty(101), 'response contains a section for establishment `101`');
+          assert(response.body.hasOwnProperty(102), 'response contains a section for establishment `102`');
+          assert.deepEqual(response.body[100], ['task3.task3a']);
+          assert.deepEqual(response.body[101], ['task1', 'task3.task3a']);
+          assert.deepEqual(response.body[102], ['task3.task3a']);
+        });
+    });
+
+    it('includes global tasks which are not scoped under an establishment', () => {
+      stubProfile(this.api.db.Profile, {
+        establishments: [
+          {
+            id: 100,
+            role: 'basic'
+          }
+        ]
+      });
+      return supertest(this.app)
+        .get('/')
+        .expect(200)
+        .expect(response => {
+          assert(response.body.hasOwnProperty('global'), 'response contains a section for globally allowed tasks');
         });
     });
   });
