@@ -271,6 +271,13 @@ describe('API', () => {
           assert(response.body.hasOwnProperty('global'), 'response contains a section for globally allowed tasks');
         });
     });
+
+    it('returns 400 if the profile cannot be found', () => {
+      stubProfile(this.api.db.Profile, null);
+      return supertest(this.app)
+        .get('/')
+        .expect(400);
+    });
   });
 
 });
