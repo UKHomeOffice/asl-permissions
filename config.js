@@ -15,28 +15,28 @@ module.exports = {
   },
   permissions: {
     place: {
-      read: ['establishment:admin', 'establishment:read'],
-      create: ['inspector', 'establishment:admin'],
-      update: ['inspector', 'establishment:admin'],
-      delete: ['inspector', 'establishment:admin']
+      read: ['asru:*', 'establishment:admin', 'establishment:read'],
+      create: ['establishment:admin'],
+      update: ['establishment:admin'],
+      delete: ['establishment:admin']
     },
     profile: {
       invite: ['establishment:admin'],
       read: {
-        all: ['establishment:admin', 'establishment:read'],
+        all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['establishment:*']
       },
       update: ['profile:own']
     },
     project: {
       read: {
-        all: ['establishment:admin', 'establishment:read'],
+        all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['establishment:*']
       }
     },
     establishment: {
-      read: ['inspector', 'establishment:*'],
-      list: ['inspector']
+      read: ['asru:*', 'establishment:*'],
+      list: ['asru:*']
     }
   }
 };
