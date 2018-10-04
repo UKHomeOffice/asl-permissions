@@ -24,14 +24,14 @@ module.exports = {
       invite: ['establishment:admin'],
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
-        basic: ['establishment:*']
+        basic: ['asru:*', 'establishment:*']
       },
       update: ['profile:own']
     },
     project: {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
-        basic: ['establishment:*']
+        basic: ['asru:*', 'establishment:*']
       }
     },
     establishment: {
