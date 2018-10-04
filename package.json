@@ -24,7 +24,7 @@
   "dependencies": {
     "@asl/constants": "0.0.1",
     "@asl/schema": "^5.0.0",
-    "@asl/service": "^6.1.1",
+    "@asl/service": "^6.1.2",
     "lodash": "^4.17.10"
   },
   "devDependencies": {
