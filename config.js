@@ -28,6 +28,12 @@ module.exports = {
       },
       update: ['profile:own']
     },
+    pil: {
+      read: ['asru:*', 'establishment:admin', 'establishment:read'],
+      create: ['profile:own', 'establishment:admin'],
+      update: ['profile:own', 'establishment:admin'],
+      delete: ['profile:own', 'establishment:admin']
+    },
     project: {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
