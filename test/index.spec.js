@@ -154,10 +154,10 @@ describe('API', () => {
       const user = { id: '100' };
       this.app = User(this.api, user);
       stubProfile(this.api.db.Profile, {
-        asru_user: true,
-        asru_inspector: true,
-        asru_licensing: false,
-        asru_admin: false
+        asruUser: true,
+        asruInspector: true,
+        asruLicensing: false,
+        asruAdmin: false
       });
     });
 
