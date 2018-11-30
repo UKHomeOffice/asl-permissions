@@ -26,7 +26,8 @@ module.exports = {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*']
       },
-      update: ['profile:own']
+      update: ['profile:own'],
+      permissions: ['establishment:admin']
     },
     pil: {
       read: ['asru:*', 'establishment:admin', 'establishment:read'],
