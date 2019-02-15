@@ -40,7 +40,8 @@ module.exports = {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*']
-      }
+      },
+      apply: ['establishment:*']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
