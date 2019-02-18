@@ -41,7 +41,8 @@ module.exports = {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*']
       },
-      apply: ['establishment:*']
+      apply: ['establishment:*'],
+      update: ['estabishment:admin', 'profile:own']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
