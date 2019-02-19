@@ -39,7 +39,8 @@ module.exports = {
     project: {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
-        basic: ['asru:*', 'establishment:*']
+        basic: ['asru:*', 'establishment:*'],
+        single: ['asru:*', 'establishment:admin', 'estabishment:read', 'profile:own']
       },
       apply: ['establishment:*'],
       update: ['estabishment:admin', 'profile:own']
