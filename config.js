@@ -40,10 +40,10 @@ module.exports = {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*'],
-        single: ['asru:*', 'establishment:admin', 'estabishment:read', 'profile:own']
+        single: ['asru:*', 'establishment:admin', 'estabishment:read', 'project:own']
       },
       apply: ['establishment:*'],
-      update: ['estabishment:admin', 'profile:own']
+      update: ['estabishment:admin', 'project:own']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
