@@ -31,7 +31,7 @@ module.exports = {
       roles: ['establishment:admin']
     },
     pil: {
-      read: ['asru:*', 'establishment:admin', 'establishment:read'],
+      read: ['profile:own', 'asru:*', 'establishment:admin', 'establishment:read'],
       create: ['profile:own', 'establishment:admin'],
       update: ['profile:own', 'establishment:admin'],
       delete: ['profile:own', 'establishment:admin']
