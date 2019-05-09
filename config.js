@@ -43,7 +43,8 @@ module.exports = {
         single: ['asru:*', 'establishment:admin', 'establishment:read', 'project:own']
       },
       apply: ['establishment:*'],
-      update: ['establishment:admin', 'project:own']
+      update: ['establishment:admin', 'project:own'],
+      updateConditions: ['asru:*']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
