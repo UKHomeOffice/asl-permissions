@@ -48,7 +48,8 @@ module.exports = {
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
-      list: ['asru:*']
+      list: ['asru:*'],
+      updateConditions: ['asru:*']
     }
   }
 };
