@@ -34,7 +34,8 @@ module.exports = {
       read: ['profile:own', 'asru:*', 'establishment:admin', 'establishment:read'],
       create: ['profile:own', 'establishment:admin'],
       update: ['profile:own', 'establishment:admin'],
-      delete: ['profile:own', 'establishment:admin']
+      delete: ['profile:own', 'establishment:admin'],
+      updateConditions: ['asru:*']
     },
     project: {
       read: {
