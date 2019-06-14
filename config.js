@@ -50,6 +50,7 @@ module.exports = {
     establishment: {
       read: ['asru:*', 'establishment:*'],
       list: ['asru:*'],
+      update: ['establishment:admin'],
       updateConditions: ['asru:*']
     }
   }
