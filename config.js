@@ -16,9 +16,9 @@ module.exports = {
   permissions: {
     place: {
       read: ['asru:*', 'establishment:admin', 'establishment:read'],
-      create: ['establishment:admin'],
-      update: ['establishment:admin'],
-      delete: ['establishment:admin']
+      create: ['asru:*', 'establishment:admin'],
+      update: ['asru:*', 'establishment:admin'],
+      delete: ['asru:*', 'establishment:admin']
     },
     profile: {
       invite: ['establishment:admin'],
@@ -28,7 +28,7 @@ module.exports = {
       },
       update: ['profile:own'],
       permissions: ['establishment:admin'],
-      roles: ['establishment:admin']
+      roles: ['asru:*', 'establishment:admin']
     },
     pil: {
       read: ['profile:own', 'asru:*', 'establishment:admin', 'establishment:read'],
@@ -50,7 +50,7 @@ module.exports = {
     establishment: {
       read: ['asru:*', 'establishment:*'],
       list: ['asru:*'],
-      update: ['establishment:admin'],
+      update: ['asru:*', 'establishment:admin'],
       updateConditions: ['asru:*']
     }
   }
