@@ -21,7 +21,7 @@ module.exports = {
       delete: ['asru:*', 'establishment:admin']
     },
     profile: {
-      invite: ['establishment:admin'],
+      invite: ['establishment:admin', 'asru:*'],
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*']
