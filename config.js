@@ -47,7 +47,7 @@ module.exports = {
       update: ['establishment:admin', 'project:own'],
       updateConditions: ['asru:*'],
       delete: ['establishment:admin', 'project:own'],
-      revoke: ['asru:*', 'establishment:admin', 'establishment:read', 'project:own']
+      revoke: ['asru:*', 'establishment:admin', 'project:own']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
