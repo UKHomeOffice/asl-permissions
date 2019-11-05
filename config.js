@@ -15,6 +15,7 @@ module.exports = {
   },
   permissions: {
     place: {
+      list: ['asru:*', 'establishment:admin', 'establishment:read'],
       read: ['asru:*', 'establishment:admin', 'establishment:read'],
       create: ['asru:*', 'establishment:admin'],
       update: ['asru:*', 'establishment:admin'],
@@ -51,6 +52,7 @@ module.exports = {
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
+      pdf: ['asru:*', 'establishment:admin', 'establishment:read'],
       list: ['asru:*'],
       update: ['asru:*', 'establishment:admin'],
       updateConditions: ['asru:*']
