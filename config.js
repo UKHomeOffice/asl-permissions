@@ -55,7 +55,8 @@ module.exports = {
       pdf: ['asru:*', 'establishment:admin', 'establishment:read'],
       list: ['asru:*'],
       update: ['asru:*', 'establishment:admin'],
-      updateConditions: ['asru:*']
+      updateConditions: ['asru:*'],
+      create: ['asru:*']
     }
   }
 };
