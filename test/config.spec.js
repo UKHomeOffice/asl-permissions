@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const { get } = require('lodash');
 const { permissions } = require('../config');
-const { externalPermissions } = require('@asl/constants');
+const { externalPermissions, roles } = require('@asl/constants');
 const { traverse } = require('../lib/utils');
 
 describe('Task configuration', () => {
@@ -11,11 +11,16 @@ describe('Task configuration', () => {
 
   tasks.forEach(task => {
     it(`${task}: only has pre-defined establishment permissions`, () => {
-      const roles = get(permissions, task);
-      roles.forEach(role => {
-        if (role.match(/^estabishment:(.*)$/)) {
-          const type = role.split(':')[1];
-          assert.ok(externalPermissions.includes(type), `${type} is included in external permissions allowed roles`);
+      const permissionTypes = get(permissions, task);
+      permissionTypes.forEach(type => {
+        if (type.match(/^estabishment:(.*)$/)) {
+          const level = type.split(':')[1];
+          if (level === 'role') {
+            const roleType = type.split(':')[2];
+            assert.ok(roles.includes(roleType), `${roleType} should be included in defined roles`);
+          } else {
+            assert.ok(externalPermissions.includes(level), `${level} should be included in defined permissions levels`);
+          }
         }
       });
     });

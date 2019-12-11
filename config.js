@@ -24,7 +24,7 @@ module.exports = {
     profile: {
       invite: ['establishment:admin', 'asru:*'],
       read: {
-        all: ['asru:*', 'establishment:admin', 'establishment:read'],
+        all: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
         basic: ['asru:*', 'establishment:*']
       },
       update: ['profile:own'],
