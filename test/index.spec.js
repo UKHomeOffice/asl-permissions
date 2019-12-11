@@ -19,7 +19,7 @@ describe('API', () => {
     this.api = API({
       db: {},
       log: {
-        level: 'silent'
+        level: 'error'
       },
       permissions: {
         task1: ['establishment:admin'],
@@ -27,7 +27,8 @@ describe('API', () => {
         task3: {
           task3a: ['establishment:admin', 'establishment:readonly', 'establishment:basic', 'asru:inspector']
         },
-        task4: ['asru:*']
+        task4: ['asru:*'],
+        task5: ['establishment:role:ntco']
       }
     });
   });
@@ -146,6 +147,105 @@ describe('API', () => {
         .get('/profile.update?id=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa')
         .expect(403);
     });
+  });
+
+  describe('role based permissions', () => {
+
+    describe('when a user has the role', () => {
+
+      beforeEach(() => {
+        const user = { id: '100' };
+        this.app = User(this.api, user);
+        stubProfile(this.api.db.Profile, {
+          establishments: [
+            {
+              id: 100,
+              role: 'basic'
+            },
+            {
+              id: 101,
+              role: 'basic'
+            }
+          ],
+          roles: [
+            {
+              establishmentId: 100,
+              type: 'ntco'
+            }
+          ]
+        });
+      });
+
+      it('returns 200 for establishments where the user holds the role', () => {
+        return supertest(this.app)
+          .get('/task5?establishment=100')
+          .expect(200);
+      });
+
+      it('returns 403 for establishments where the user does not hold the role', () => {
+        return supertest(this.app)
+          .get('/task5?establishment=101')
+          .expect(403);
+      });
+
+    });
+    describe('when a user has a different role', () => {
+
+      beforeEach(() => {
+        const user = { id: '100' };
+        this.app = User(this.api, user);
+        stubProfile(this.api.db.Profile, {
+          establishments: [
+            {
+              id: 100,
+              role: 'basic'
+            }
+          ],
+          roles: [
+            {
+              establishmentId: 100,
+              type: 'nio'
+            }
+          ]
+        });
+      });
+
+      it('returns 403', () => {
+        return supertest(this.app)
+          .get('/task5?establishment=100')
+          .expect(403);
+      });
+
+    });
+    describe('when a user is an admin who does not hold the role', () => {
+
+      beforeEach(() => {
+        const user = { id: '100' };
+        this.app = User(this.api, user);
+        stubProfile(this.api.db.Profile, {
+          establishments: [
+            {
+              id: 100,
+              role: 'admin'
+            }
+          ],
+          roles: [
+            {
+              establishmentId: 100,
+              type: 'holc'
+            }
+          ]
+        });
+      });
+
+      it('returns 403', () => {
+        return supertest(this.app)
+          .get('/task5?establishment=100')
+          .expect(403);
+      });
+
+    });
+
   });
 
   describe('when user is an inspector', () => {
