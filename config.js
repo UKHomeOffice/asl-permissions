@@ -33,6 +33,7 @@ module.exports = {
     },
     pil: {
       read: ['profile:own', 'asru:*', 'establishment:admin', 'establishment:read'],
+      pdf: ['profile:own', 'asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read'],
       create: ['profile:own', 'establishment:admin'],
       update: ['profile:own', 'establishment:admin', 'asru:*'],
       delete: ['profile:own', 'establishment:admin'],
