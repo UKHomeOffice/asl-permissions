@@ -17,9 +17,9 @@ describe('Task configuration', () => {
           const level = type.split(':')[1];
           if (level === 'role') {
             const roleType = type.split(':')[2];
-            assert.ok(roles.includes(roleType), `${roleType} should be included in defined roles`);
+            assert.ok([ ...roles, '*' ].includes(roleType), `${roleType} should be included in defined roles`);
           } else {
-            assert.ok(externalPermissions.includes(level), `${level} should be included in defined permissions levels`);
+            assert.ok([ ...externalPermissions, '*' ].includes(level), `${level} should be included in defined permissions levels`);
           }
         }
       });

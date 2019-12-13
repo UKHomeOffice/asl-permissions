@@ -35,21 +35,21 @@ module.exports = {
       read: ['profile:own', 'asru:*', 'establishment:admin', 'establishment:read'],
       pdf: ['profile:own', 'asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read'],
       create: ['profile:own', 'establishment:admin'],
-      update: ['profile:own', 'establishment:admin', 'asru:*'],
-      delete: ['profile:own', 'establishment:admin'],
+      update: ['profile:own', 'holdingEstablishment:admin', 'asru:*'],
+      delete: ['profile:own', 'holdingEstablishment:admin'],
       updateConditions: ['asru:*']
     },
     project: {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*'],
-        single: ['asru:*', 'establishment:admin', 'establishment:read', 'project:own']
+        single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own']
       },
       apply: ['establishment:*'],
-      update: ['establishment:admin', 'project:own'],
+      update: ['holdingEstablishment:admin', 'project:own'],
       updateConditions: ['asru:*'],
-      delete: ['establishment:admin', 'project:own'],
-      revoke: ['asru:*', 'establishment:admin', 'project:own']
+      delete: ['holdingEstablishment:admin', 'project:own'],
+      revoke: ['asru:*', 'holdingEstablishment:admin', 'project:own']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
