@@ -77,6 +77,41 @@ describe('allowed', () => {
         });
     });
 
+    it('uses `id` param if `pilId` is not defined', () => {
+      selectStub.resolves({ establishmentId: 8201 });
+      params.subject = { id: 123 };
+
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith(123), 'PIL was looked up by provided ID');
+          assert.equal(isAllowed, true, 'Permission check passed');
+        });
+    });
+
+    it('fails if `pilId` and `id` are not defined', () => {
+      selectStub.resolves({ establishmentId: 8201 });
+      params.subject = {};
+
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.equal(isAllowed, false, 'Permission check failed');
+        });
+    });
+
+    it('fails if no database record can be found', () => {
+      selectStub.resolves();
+      params.subject = { pilId: 123 };
+
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith(123), 'PIL was looked up by provided ID');
+          assert.equal(isAllowed, false, 'Permission check failed');
+        });
+    });
+
     it('fails if user does not have permission at PIL holding establishment', () => {
       selectStub.resolves({ establishmentId: 8202 });
       params.subject = { pilId: 123 };
