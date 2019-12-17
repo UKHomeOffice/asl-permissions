@@ -75,6 +75,87 @@ describe('allowed', () => {
 
   });
 
+  describe('project:own', () => {
+    let findStub;
+    let selectStub;
+    const USER_ID = '1efe4fe4-9c9a-4d89-af91-fc5eea0014f1';
+    const USER_2_ID = '970ee4ee-e70b-4b36-be98-9f16415c9012';
+    const PROJECT_ID = '29ece18a-afeb-4dc9-a02e-734e054a40c7';
+
+    beforeEach(() => {
+      findStub = sinon.stub();
+      selectStub = sinon.stub();
+      const stubModels = {
+        Project: {
+          query: sinon.stub().returns({
+            findById: findStub.returns({
+              select: selectStub
+            })
+          })
+        }
+      };
+
+      allowed = allowedHelper({ db: stubModels });
+    });
+
+    it('checks logged in user is the ppl holder', () => {
+      const params = {
+        permissions: ['project:own'],
+        user: {
+          id: USER_ID
+        },
+        subject: {
+          projectId: PROJECT_ID
+        }
+      };
+      selectStub.resolves({ licenceHolderId: USER_ID });
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith(PROJECT_ID), 'PPL was looked up by provided ID');
+          assert.equal(isAllowed, true, 'Permission check should pass');
+        });
+    });
+
+    it('falls back to an `id` param on the subject if provided', () => {
+      const params = {
+        permissions: ['project:own'],
+        user: {
+          id: USER_ID
+        },
+        subject: {
+          id: PROJECT_ID
+        }
+      };
+      selectStub.resolves({ licenceHolderId: USER_ID });
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith(PROJECT_ID), 'PPL was looked up by provided ID');
+          assert.equal(isAllowed, true, 'Permission check should pass');
+        });
+    });
+
+    it('fails if licence holder is a different user', () => {
+      const params = {
+        permissions: ['project:own'],
+        user: {
+          id: USER_ID
+        },
+        subject: {
+          projectId: PROJECT_ID
+        }
+      };
+      selectStub.resolves({ licenceHolderId: USER_2_ID });
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.equal(isAllowed, false, 'Permission check should fail');
+        });
+    });
+
+  });
+
   describe('holdingEstablishment', () => {
     let findStub;
     let selectStub;
