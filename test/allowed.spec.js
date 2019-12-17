@@ -20,6 +20,61 @@ describe('allowed', () => {
       });
   });
 
+  describe('pil:own', () => {
+    let findStub;
+    let selectStub;
+    let params;
+    const USER_ID = '1efe4fe4-9c9a-4d89-af91-fc5eea0014f1';
+    const USER_2_ID = '970ee4ee-e70b-4b36-be98-9f16415c9012';
+    const PIL_ID = '29ece18a-afeb-4dc9-a02e-734e054a40c7';
+
+    beforeEach(() => {
+      findStub = sinon.stub();
+      selectStub = sinon.stub();
+      const stubModels = {
+        PIL: {
+          query: sinon.stub().returns({
+            findById: findStub.returns({
+              select: selectStub
+            })
+          })
+        }
+      };
+
+      allowed = allowedHelper({ db: stubModels });
+
+      params = {
+        permissions: ['pil:own'],
+        user: {
+          id: USER_ID
+        },
+        subject: {
+          pilId: PIL_ID
+        }
+      };
+    });
+
+    it('checks logged in user is the pil holder', () => {
+      selectStub.resolves({ profileId: USER_ID });
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith(PIL_ID), 'PIL was looked up by provided ID');
+          assert.equal(isAllowed, true, 'Permission check passed');
+        });
+    });
+
+    it('fails if licence holder is a different user', () => {
+      selectStub.resolves({ profileId: USER_2_ID });
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.equal(isAllowed, false, 'Permission check failed');
+        });
+    });
+
+  });
+
   describe('holdingEstablishment', () => {
     let findStub;
     let selectStub;
