@@ -32,11 +32,11 @@ module.exports = {
       roles: ['asru:*', 'establishment:admin']
     },
     pil: {
-      read: ['profile:own', 'asru:*', 'establishment:admin', 'establishment:read'],
-      pdf: ['profile:own', 'asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read'],
-      create: ['profile:own', 'establishment:admin'],
-      update: ['profile:own', 'holdingEstablishment:admin', 'asru:*'],
-      delete: ['profile:own', 'holdingEstablishment:admin'],
+      read: ['pil:own', 'asru:*', 'establishment:admin', 'establishment:read'],
+      pdf: ['pil:own', 'asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read'],
+      create: ['pil:own', 'establishment:admin'],
+      update: ['pil:own', 'holdingEstablishment:admin', 'asru:*'],
+      delete: ['pil:own', 'holdingEstablishment:admin'],
       updateConditions: ['asru:*']
     },
     project: {
