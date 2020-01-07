@@ -32,12 +32,14 @@ module.exports = {
       roles: ['asru:*', 'establishment:admin']
     },
     pil: {
+      list: ['asru:*', 'establishment:admin', 'establishment:read'],
       read: ['pil:own', 'asru:*', 'establishment:admin', 'establishment:read'],
       pdf: ['pil:own', 'asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read'],
       create: ['profile:own', 'establishment:admin'],
       update: ['pil:own', 'holdingEstablishment:admin', 'asru:*'],
       delete: ['pil:own', 'holdingEstablishment:admin'],
-      updateConditions: ['asru:*']
+      updateConditions: ['asru:*'],
+      updateBillable: ['asru:*']
     },
     project: {
       read: {
@@ -57,7 +59,9 @@ module.exports = {
       list: ['asru:*'],
       update: ['asru:*', 'establishment:admin'],
       updateConditions: ['asru:*'],
-      create: ['asru:*']
-    }
+      create: ['asru:*'],
+      licenceFees: ['asru:*', 'establishment:admin']
+    },
+    licenceFees: ['asru:*']
   }
 };
