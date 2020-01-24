@@ -38,6 +38,7 @@ module.exports = {
       create: ['profile:own', 'establishment:admin'],
       update: ['pil:own', 'holdingEstablishment:admin', 'asru:*'],
       delete: ['pil:own', 'holdingEstablishment:admin'],
+      transfer: ['pil:own', 'asru:*'],
       updateConditions: ['asru:*'],
       updateBillable: ['asru:*']
     },
