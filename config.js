@@ -62,7 +62,7 @@ module.exports = {
       update: ['asru:*', 'establishment:admin'],
       updateConditions: ['asru:*'],
       create: ['asru:*'],
-      licenceFees: ['asru:*'],
+      licenceFees: ['establishment:admin', 'asru:*'],
       sharedKey: ['asru:*']
     },
     licenceFees: ['asru:*']
