@@ -49,7 +49,7 @@ module.exports = {
         single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own']
       },
       apply: ['establishment:*'],
-      update: ['holdingEstablishment:admin', 'project:own'],
+      update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
       updateConditions: ['asru:*'],
       updateIssueDate: ['asru:licensing'],
       delete: ['holdingEstablishment:admin', 'project:own'],
