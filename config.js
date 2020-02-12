@@ -40,7 +40,7 @@ module.exports = {
       delete: ['pil:own', 'holdingEstablishment:admin'],
       transfer: ['pil:own', 'asru:*'],
       updateConditions: ['asru:*'],
-      updateBillable: ['asru:*']
+      updateBillable: ['asru:admin']
     },
     project: {
       read: {
