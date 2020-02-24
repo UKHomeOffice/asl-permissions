@@ -53,7 +53,8 @@ module.exports = {
       updateConditions: ['asru:*'],
       updateIssueDate: ['asru:licensing'],
       delete: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
-      revoke: ['asru:*', 'holdingEstablishment:admin', 'project:own']
+      revoke: ['asru:*', 'holdingEstablishment:admin', 'project:own'],
+      convertLegacy: ['asru:licensing']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
