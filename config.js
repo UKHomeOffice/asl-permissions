@@ -48,6 +48,7 @@ module.exports = {
         basic: ['asru:*', 'establishment:*'],
         single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own']
       },
+      transfer: ['project:own'],
       apply: ['establishment:*'],
       update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
       updateConditions: ['asru:*'],
