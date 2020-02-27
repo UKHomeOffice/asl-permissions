@@ -57,6 +57,9 @@ module.exports = {
       revoke: ['asru:*', 'holdingEstablishment:admin', 'project:own'],
       convertLegacy: ['asru:licensing']
     },
+    projectVersion: {
+      read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'receivingEstablishment:admin']
+    },
     establishment: {
       read: ['asru:*', 'establishment:*'],
       pdf: ['asru:*', 'establishment:admin', 'establishment:read'],

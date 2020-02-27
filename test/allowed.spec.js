@@ -287,4 +287,65 @@ describe('allowed', () => {
     });
   });
 
+  describe('receivingEstablishment', () => {
+    let findStub;
+    let selectStub;
+    let params;
+
+    beforeEach(() => {
+      findStub = sinon.stub();
+      selectStub = sinon.stub();
+      const stubModels = {
+        ProjectVersion: {
+          query: sinon.stub().returns({
+            findById: findStub.returns({
+              select: selectStub
+            })
+          })
+        }
+      };
+
+      allowed = allowedHelper({ db: stubModels });
+
+      params = {
+        model: 'projectVersion',
+        permissions: ['receivingEstablishment:admin'],
+        user: {
+          establishments: [
+            {
+              id: 8202,
+              role: 'admin'
+            }
+          ]
+        }
+      };
+    });
+
+    it('checks roles at project holding establishment', () => {
+      selectStub.resolves({ data: { transferToEstablishment: 8202 } });
+      params.model = 'projectVersion';
+      params.subject = { versionId: 'abc' };
+
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith('abc'), 'ProjectVersion was looked up by provided ID');
+          assert.equal(isAllowed, true, 'Permission check passed');
+        });
+    });
+
+    it('fails if user does not have permission at project holding establishment', () => {
+      selectStub.resolves({ data: { transferToEstablishment: 8201 } });
+      params.model = 'projectVersion';
+      params.subject = { versionId: 'abc' };
+
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith('abc'), 'ProjectVersion was looked up by provided ID');
+          assert.equal(isAllowed, false, 'Permission check failed');
+        });
+    });
+  });
+
 });
