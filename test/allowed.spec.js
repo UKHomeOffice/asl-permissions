@@ -178,6 +178,13 @@ describe('allowed', () => {
               select: selectStub
             })
           })
+        },
+        ProjectVersion: {
+          query: sinon.stub().returns({
+            findById: findStub.returns({
+              select: selectStub
+            })
+          })
         }
       };
 
@@ -276,6 +283,32 @@ describe('allowed', () => {
     it('fails if user does not have permission at project holding establishment', () => {
       selectStub.resolves({ establishmentId: 8202 });
       params.model = 'project';
+      params.subject = { projectId: 'abc' };
+
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith('abc'), 'Project was looked up by provided ID');
+          assert.equal(isAllowed, false, 'Permission check failed');
+        });
+    });
+
+    it('checks roles at project version holding establishment', () => {
+      selectStub.resolves({ establishmentId: 8201 });
+      params.model = 'projectVersion';
+      params.subject = { projectId: 'abc' };
+
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.ok(findStub.calledWith('abc'), 'Project was looked up by provided ID');
+          assert.equal(isAllowed, true, 'Permission check passed');
+        });
+    });
+
+    it('fails if user does not have permission at project version holding establishment', () => {
+      selectStub.resolves({ establishmentId: 8202 });
+      params.model = 'projectVersion';
       params.subject = { projectId: 'abc' };
 
       return Promise.resolve()
