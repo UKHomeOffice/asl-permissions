@@ -355,7 +355,7 @@ describe('allowed', () => {
     });
 
     it('checks roles at project holding establishment', () => {
-      selectStub.resolves({ data: { transferToEstablishment: 8202 } });
+      selectStub.resolves({ transferToEstablishment: 8202 });
       params.model = 'projectVersion';
       params.subject = { versionId: 'abc' };
 
