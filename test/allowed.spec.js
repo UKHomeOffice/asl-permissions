@@ -33,7 +33,7 @@ describe('allowed', () => {
       selectStub = sinon.stub();
       const stubModels = {
         PIL: {
-          query: sinon.stub().returns({
+          queryWithDeleted: sinon.stub().returns({
             findById: findStub.returns({
               select: selectStub
             })
@@ -87,7 +87,7 @@ describe('allowed', () => {
       selectStub = sinon.stub();
       const stubModels = {
         Project: {
-          query: sinon.stub().returns({
+          queryWithDeleted: sinon.stub().returns({
             findById: findStub.returns({
               select: selectStub
             })
@@ -166,21 +166,21 @@ describe('allowed', () => {
       selectStub = sinon.stub();
       const stubModels = {
         PIL: {
-          query: sinon.stub().returns({
+          queryWithDeleted: sinon.stub().returns({
             findById: findStub.returns({
               select: selectStub
             })
           })
         },
         Project: {
-          query: sinon.stub().returns({
+          queryWithDeleted: sinon.stub().returns({
             findById: findStub.returns({
               select: selectStub
             })
           })
         },
         ProjectVersion: {
-          query: sinon.stub().returns({
+          queryWithDeleted: sinon.stub().returns({
             findById: findStub.returns({
               select: selectStub
             })
@@ -330,7 +330,7 @@ describe('allowed', () => {
       selectStub = sinon.stub();
       const stubModels = {
         ProjectVersion: {
-          query: sinon.stub().returns({
+          queryWithDeleted: sinon.stub().returns({
             findById: findStub.returns({
               select: selectStub
             })
