@@ -47,7 +47,7 @@ module.exports = {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*'],
-        single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own']
+        single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'project:collaborator']
       },
       transfer: ['project:own'],
       apply: ['establishment:*'],
@@ -60,7 +60,7 @@ module.exports = {
       convertLegacy: ['asru:licensing']
     },
     projectVersion: {
-      read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'receivingEstablishment:admin']
+      read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'receivingEstablishment:admin', 'project:collaborator']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],

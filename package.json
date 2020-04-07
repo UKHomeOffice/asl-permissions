@@ -23,10 +23,11 @@
   "homepage": "https://github.com/UKHomeOffice/asl-permissions#readme",
   "dependencies": {
     "@asl/constants": "0.0.1",
-    "@asl/schema": "^7.13.2",
+    "@asl/schema": "^7.39.0",
     "@asl/service": "^7.13.0",
     "lodash": "^4.17.15",
-    "objection": "^2.1.3"
+    "objection": "^2.1.3",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "dotenv": "^6.0.0",
