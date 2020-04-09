@@ -1,3 +1,4 @@
+const uuid = require('uuid/v4');
 const assert = require('assert');
 const sinon = require('sinon');
 const allowedHelper = require('../lib/utils/allowed');
@@ -316,6 +317,66 @@ describe('allowed', () => {
         .then(isAllowed => {
           assert.ok(findStub.calledWith('abc'), 'Project was looked up by provided ID');
           assert.equal(isAllowed, false, 'Permission check failed');
+        });
+    });
+  });
+
+  describe('project collaborator', () => {
+    let selectStub;
+
+    beforeEach(() => {
+      selectStub = sinon.stub();
+      const stubModels = {
+        Project: {
+          queryWithDeleted: sinon.stub().returns({
+            whereIsCollaborator: sinon.stub().returns({
+              findById: sinon.stub().returns({
+                select: selectStub
+              })
+            })
+          })
+        }
+      };
+      allowed = allowedHelper({ db: stubModels });
+    });
+
+    it('returns true if the user is a collaborator', () => {
+      const userId = uuid();
+      selectStub.resolves({ id: '12345' });
+      const params = {
+        model: 'project',
+        subject: {
+          id: uuid()
+        },
+        permissions: ['project:collaborator'],
+        user: {
+          id: userId
+        }
+      };
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.equal(isAllowed, true);
+        });
+    });
+
+    it('returns false if the user is not a collaborator', () => {
+      const userId = uuid();
+      selectStub.resolves(null);
+      const params = {
+        model: 'project',
+        permissions: ['project:collaborator'],
+        subject: {
+          id: uuid()
+        },
+        user: {
+          id: userId
+        }
+      };
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.equal(isAllowed, false);
         });
     });
   });
