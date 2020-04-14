@@ -323,15 +323,28 @@ describe('allowed', () => {
 
   describe('project collaborator', () => {
     let selectStub;
+    let profileSelectStub;
 
     beforeEach(() => {
       selectStub = sinon.stub();
+      profileSelectStub = sinon.stub();
       const stubModels = {
         Project: {
           queryWithDeleted: sinon.stub().returns({
             whereIsCollaborator: sinon.stub().returns({
               findById: sinon.stub().returns({
                 select: selectStub
+              })
+            })
+          })
+        },
+        Profile: {
+          query: sinon.stub().returns({
+            findById: sinon.stub().returns({
+              leftJoinRelation: sinon.stub().returns({
+                where: sinon.stub().returns({
+                  select: profileSelectStub
+                })
               })
             })
           })
@@ -343,6 +356,7 @@ describe('allowed', () => {
     it('returns true if the user is a collaborator', () => {
       const userId = uuid();
       selectStub.resolves({ id: '12345' });
+      profileSelectStub.resolves({ id: '12345' });
       const params = {
         model: 'project',
         subject: {
@@ -363,6 +377,28 @@ describe('allowed', () => {
     it('returns false if the user is not a collaborator', () => {
       const userId = uuid();
       selectStub.resolves(null);
+      profileSelectStub.resolves(null);
+      const params = {
+        model: 'project',
+        permissions: ['project:collaborator'],
+        subject: {
+          id: uuid()
+        },
+        user: {
+          id: userId
+        }
+      };
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.equal(isAllowed, false);
+        });
+    });
+
+    it('returns false if the user is not at the establishment', () => {
+      const userId = uuid();
+      selectStub.resolves({ id: '12345' });
+      profileSelectStub.resolves(null);
       const params = {
         model: 'project',
         permissions: ['project:collaborator'],
