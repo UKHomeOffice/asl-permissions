@@ -478,4 +478,52 @@ describe('allowed', () => {
     });
   });
 
+  describe('error handling', () => {
+
+    let stub;
+    let params;
+    const USER_ID = '1efe4fe4-9c9a-4d89-af91-fc5eea0014f1';
+    const PIL_ID = '29ece18a-afeb-4dc9-a02e-734e054a40c7';
+
+    beforeEach(() => {
+      stub = sinon.stub().rejects(new Error('Test'));
+
+      const stubModels = {
+        PIL: {
+          queryWithDeleted: stub
+        }
+      };
+
+      allowed = allowedHelper({ db: stubModels });
+
+      params = {
+        permissions: ['pil:own'],
+        user: {
+          id: USER_ID
+        },
+        subject: {
+          pilId: PIL_ID
+        },
+        log: sinon.stub()
+      };
+    });
+
+    it('returns false if a check throws an error', () => {
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.equal(isAllowed, false);
+        });
+    });
+
+    it('returns logs the error', () => {
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(() => {
+          assert.ok(params.log.calledWith('error'), 'error logger should have been called');
+        });
+    });
+
+  });
+
 });
