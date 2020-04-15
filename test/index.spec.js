@@ -115,6 +115,39 @@ describe('API', () => {
 
   });
 
+  describe('when user is blocked by an establishment', () => {
+
+    beforeEach(() => {
+      const user = { id: '100' };
+      this.app = User(this.api, user);
+      stubProfile(this.api.db.Profile, {
+        establishments: [
+          {
+            id: 100,
+            role: 'blocked'
+          },
+          {
+            id: 101,
+            role: 'basic'
+          }
+        ]
+      });
+    });
+
+    it('returns 403 for tasks which have "establishment:basic" at blocked establishments', () => {
+      return supertest(this.app)
+        .get('/task3.task3a?establishment=100')
+        .expect(403);
+    });
+
+    it('returns 200 for tasks which have "establishment:basic" at non-blocked establishments', () => {
+      return supertest(this.app)
+        .get('/task3.task3a?establishment=101')
+        .expect(200);
+    });
+
+  });
+
   describe('profile:own permissions', () => {
 
     const id = '3076871b-0aa7-4890-abbc-9e12c7c4af84';
@@ -165,11 +198,19 @@ describe('API', () => {
             {
               id: 101,
               role: 'basic'
+            },
+            {
+              id: 102,
+              role: 'blocked'
             }
           ],
           roles: [
             {
               establishmentId: 100,
+              type: 'ntco'
+            },
+            {
+              establishmentId: 102,
               type: 'ntco'
             }
           ]
@@ -185,6 +226,12 @@ describe('API', () => {
       it('returns 403 for establishments where the user does not hold the role', () => {
         return supertest(this.app)
           .get('/task5?establishment=101')
+          .expect(403);
+      });
+
+      it('returns 403 for establishments where the user holds the role but is blocked', () => {
+        return supertest(this.app)
+          .get('/task5?establishment=102')
           .expect(403);
       });
 
