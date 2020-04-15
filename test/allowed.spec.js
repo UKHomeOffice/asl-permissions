@@ -341,7 +341,7 @@ describe('allowed', () => {
         Profile: {
           query: sinon.stub().returns({
             findById: sinon.stub().returns({
-              leftJoinRelation: sinon.stub().returns({
+              leftJoinRelated: sinon.stub().returns({
                 where: sinon.stub().returns({
                   select: profileSelectStub
                 })
