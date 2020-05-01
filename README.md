@@ -40,6 +40,16 @@ The following environment variables can be optionally defined:
 * `DATABASE_PORT` - port of the postgres instance - default `5432`
 * `DATABASE_USERNAME` - username of the postgres instance - default `undefined`
 * `DATABASE_PASSWORD` - password of the postgres instance - default `undefined`
+* `CACHE_TTL` - ttl for cache, if not set will disable caching - default `undefined`
+* `REDIS_HOST` - hostname for redis cache store
+* `REDIS_PORT` - port for redis cache store
+* `REDIS_PASSWORD` - password for redis cache store
+
+## Caching
+
+An optional cache can be configured by defining a `CACHE_TTL` environment variable. This will attempt to connect to a redis instance to store cache entries, but will fall back to an in memory cache if redis is not configured or cannot connect.
+
+See https://www.npmjs.com/package/apicache#api for configuration options for cache duration
 
 ### Permissions configuration
 
