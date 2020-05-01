@@ -1,5 +1,11 @@
 module.exports = {
   port: process.env.PORT || 8080,
+  cache: process.env.CACHE_TTL,
+  redis: {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD
+  },
   auth: {
     realm: process.env.KEYCLOAK_REALM,
     url: process.env.KEYCLOAK_URL,
