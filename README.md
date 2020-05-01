@@ -49,6 +49,8 @@ The following environment variables can be optionally defined:
 
 An optional cache can be configured by defining a `CACHE_TTL` environment variable. This will attempt to connect to a redis instance to store cache entries, but will fall back to an in memory cache if redis is not configured or cannot connect.
 
+See https://www.npmjs.com/package/apicache#api for configuration options for cache duration
+
 ### Permissions configuration
 
 The allowed roles for each task are defined in [config.js](./config.js). Adding a role to a task grants permission to perform that task to users with that role.
