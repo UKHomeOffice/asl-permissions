@@ -25,7 +25,8 @@ module.exports = {
       read: ['asru:*', 'establishment:admin', 'establishment:read'],
       create: ['asru:*', 'establishment:admin'],
       update: ['asru:*', 'establishment:admin'],
-      delete: ['asru:*', 'establishment:admin']
+      delete: ['asru:*', 'establishment:admin'],
+      relatedTasks: ['asru:*', 'establishment:admin']
     },
     profile: {
       invite: ['establishment:admin', 'asru:*'],
@@ -35,7 +36,8 @@ module.exports = {
       },
       update: ['profile:own'],
       permissions: ['asru:*', 'establishment:admin'],
-      roles: ['asru:*', 'establishment:admin']
+      roles: ['asru:*', 'establishment:admin'],
+      relatedTasks: ['asru:*', 'establishment:admin', 'profile:own']
     },
     pil: {
       list: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
@@ -47,7 +49,8 @@ module.exports = {
       review: ['establishment:role:ntco'],
       transfer: ['pil:own', 'asru:*'],
       updateConditions: ['asru:*'],
-      updateBillable: ['asru:admin']
+      updateBillable: ['asru:admin'],
+      relatedTasks: ['pil:own', 'holdingEstablishment:admin', 'asru:*']
     },
     project: {
       read: {
@@ -63,7 +66,8 @@ module.exports = {
       updateLicenceNumber: ['asru:licensing'],
       delete: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
       revoke: ['asru:*', 'holdingEstablishment:admin', 'project:own'],
-      convertLegacy: ['asru:licensing']
+      convertLegacy: ['asru:licensing'],
+      relatedTasks: ['holdingEstablishment:admin', 'project:own', 'asru:*']
     },
     projectVersion: {
       read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'receivingEstablishment:admin', 'project:collaborator']
@@ -77,7 +81,8 @@ module.exports = {
       create: ['asru:*'],
       licenceFees: ['establishment:admin', 'asru:*'],
       sharedKey: ['asru:*'],
-      revoke: ['asru:licensing']
+      revoke: ['asru:licensing'],
+      relatedTasks: ['asru:*', 'establishment:admin']
     },
     licenceFees: ['asru:*']
   }
