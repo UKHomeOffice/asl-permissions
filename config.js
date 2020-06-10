@@ -84,6 +84,7 @@ module.exports = {
       revoke: ['asru:licensing'],
       relatedTasks: ['asru:*', 'establishment:admin']
     },
+    asruProfile: ['*'],
     licenceFees: ['asru:*']
   }
 };
