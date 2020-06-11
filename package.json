@@ -38,7 +38,7 @@
     "eslint-plugin-undocumented-env": "^1.0.0",
     "express": "^4.16.3",
     "mocha": "^5.2.0",
-    "nodemon": "^1.17.5",
+    "nodemon": "^2.0.4",
     "sinon": "^6.1.4",
     "supertest": "^3.1.0"
   }
