@@ -304,7 +304,8 @@ describe('API', () => {
         asruUser: true,
         asruInspector: true,
         asruLicensing: false,
-        asruAdmin: false
+        asruAdmin: false,
+        asruSupport: false
       });
     });
 
