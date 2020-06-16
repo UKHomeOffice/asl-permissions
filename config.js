@@ -85,6 +85,7 @@ module.exports = {
       relatedTasks: ['asru:*', 'establishment:admin']
     },
     asruProfile: ['*'],
-    licenceFees: ['asru:*']
+    licenceFees: ['asru:*'],
+    asruReporting: ['asru:*']
   }
 };
