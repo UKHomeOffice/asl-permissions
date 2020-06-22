@@ -49,7 +49,7 @@ module.exports = {
       review: ['establishment:role:ntco'],
       transfer: ['pil:own', 'asru:*'],
       updateConditions: ['asru:*'],
-      updateBillable: ['asru:admin'],
+      updateBillable: ['asru:support'],
       relatedTasks: ['pil:own', 'holdingEstablishment:admin', 'asru:*']
     },
     project: {
@@ -86,6 +86,6 @@ module.exports = {
     },
     asruProfile: ['*'],
     licenceFees: ['asru:*'],
-    asruReporting: ['asru:*']
+    asruReporting: ['asru:support']
   }
 };
