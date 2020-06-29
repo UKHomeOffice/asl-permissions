@@ -61,6 +61,7 @@ module.exports = {
       transfer: ['project:own'],
       apply: ['establishment:*'],
       update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
+      endorse: ['holdingEstablishment:admin'],
       updateConditions: ['asru:*'],
       updateIssueDate: ['asru:licensing'],
       updateLicenceNumber: ['asru:licensing'],
