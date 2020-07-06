@@ -36,6 +36,7 @@ module.exports = {
       },
       update: ['profile:own'],
       permissions: ['asru:*', 'establishment:admin'],
+      removePermissions: ['asru:*', 'establishment:admin', 'profile:own'],
       roles: ['asru:*', 'establishment:admin'],
       relatedTasks: ['asru:*', 'establishment:admin', 'profile:own']
     },
