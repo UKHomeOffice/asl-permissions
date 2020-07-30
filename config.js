@@ -40,6 +40,10 @@ module.exports = {
       roles: ['asru:*', 'establishment:admin'],
       relatedTasks: ['asru:*', 'establishment:admin', 'profile:own']
     },
+    training: {
+      read: ['asru:*', 'profile:own', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
+      update: ['asru:*', 'profile:own', 'establishment:admin', 'establishment:role:ntco']
+    },
     pil: {
       list: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
       read: ['pil:own', 'asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
