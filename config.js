@@ -47,7 +47,7 @@ module.exports = {
     pil: {
       list: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
       read: ['pil:own', 'asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
-      pdf: ['pil:own', 'asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read'],
+      pdf: ['pil:own', 'asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
       create: ['profile:own', 'establishment:admin'],
       update: ['pil:own', 'holdingEstablishment:admin', 'asru:*'],
       delete: ['pil:own', 'holdingEstablishment:admin'],
