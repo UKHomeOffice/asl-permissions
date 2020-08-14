@@ -45,6 +45,10 @@ module.exports = {
       read: ['asru:*', 'profile:own', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
       update: ['asru:*', 'profile:own', 'establishment:admin', 'establishment:role:ntco']
     },
+    trainingCourse: {
+      read: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
+      update: ['asru:*', 'establishment:admin', 'establishment:role:ntco']
+    },
     pil: {
       list: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
       read: ['pil:own', 'asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
