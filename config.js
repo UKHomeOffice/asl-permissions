@@ -34,6 +34,7 @@ module.exports = {
         all: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
         basic: ['asru:*', 'establishment:*']
       },
+      global: ['asru:*', 'profile:own'],
       update: ['profile:own'],
       permissions: ['asru:*', 'establishment:admin'],
       removePermissions: ['asru:*', 'establishment:admin', 'profile:own'],
