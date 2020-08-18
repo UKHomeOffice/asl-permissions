@@ -69,7 +69,8 @@ module.exports = {
         single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'project:collaborator']
       },
       transfer: ['project:own'],
-      apply: ['establishment:*'],
+      import: ['establishment:*'],
+      create: ['profile:own', 'establishment:admin'],
       update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
       endorse: ['holdingEstablishment:admin'],
       updateConditions: ['asru:*'],
