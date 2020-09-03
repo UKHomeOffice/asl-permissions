@@ -74,6 +74,15 @@ describe('allowed', () => {
         });
     });
 
+    it('does not throw an error if profile is not found omitted', () => {
+      selectStub.resolves(null);
+      return Promise.resolve()
+        .then(() => allowed(params))
+        .then(isAllowed => {
+          assert.equal(isAllowed, false);
+        });
+    });
+
   });
 
   describe('project:own', () => {
