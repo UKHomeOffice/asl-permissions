@@ -74,7 +74,7 @@ describe('allowed', () => {
         });
     });
 
-    it('does not throw an error if profile is not found omitted', () => {
+    it('does not throw an error if profile is not found', () => {
       selectStub.resolves(null);
       return Promise.resolve()
         .then(() => allowed(params))
