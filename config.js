@@ -53,7 +53,8 @@ module.exports = {
     pil: {
       list: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
       read: ['pil:own', 'asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
-      pdf: ['pil:own', 'asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
+      readCombinedPil: ['profile:own', 'asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
+      pdf: ['profile:own', 'asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
       create: ['profile:own', 'establishment:admin'],
       update: ['pil:own', 'holdingEstablishment:admin', 'asru:*'],
       delete: ['pil:own', 'holdingEstablishment:admin'],
@@ -61,7 +62,7 @@ module.exports = {
       transfer: ['pil:own', 'asru:*'],
       updateConditions: ['asru:*'],
       updateBillable: ['asru:support'],
-      relatedTasks: ['pil:own', 'holdingEstablishment:admin', 'asru:*']
+      relatedTasks: ['profile:own', 'holdingEstablishment:admin', 'asru:*']
     },
     project: {
       read: {
