@@ -341,8 +341,10 @@ describe('allowed', () => {
         Project: {
           queryWithDeleted: sinon.stub().returns({
             whereIsCollaborator: sinon.stub().returns({
-              findById: sinon.stub().returns({
-                select: selectStub
+              withGraphFetched: sinon.stub().returns({
+                findById: sinon.stub().returns({
+                  select: selectStub
+                })
               })
             })
           })
@@ -351,8 +353,10 @@ describe('allowed', () => {
           query: sinon.stub().returns({
             findById: sinon.stub().returns({
               leftJoinRelated: sinon.stub().returns({
-                where: sinon.stub().returns({
-                  select: profileSelectStub
+                withGraphFetched: sinon.stub().returns({
+                  whereIn: sinon.stub().returns({
+                    select: profileSelectStub
+                  })
                 })
               })
             })
