@@ -432,7 +432,7 @@ describe('allowed', () => {
     });
   });
 
-  describe.only('additional availability', () => {
+  describe('additional availability', () => {
     const ids = {
       profile: uuid(),
       basic: uuid(),
