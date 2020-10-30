@@ -1,7 +1,9 @@
+const moment = require('moment');
 const uuid = require('uuid/v4');
 const assert = require('assert');
 const sinon = require('sinon');
 const allowedHelper = require('../lib/utils/allowed');
+const db = require('./helpers/db')
 
 describe('allowed', () => {
 
@@ -427,6 +429,570 @@ describe('allowed', () => {
         .then(isAllowed => {
           assert.equal(isAllowed, false);
         });
+    });
+  });
+
+  describe.only('additional availability', () => {
+    const ids = {
+      profile: uuid(),
+      basic: uuid(),
+      licenceHolder: uuid(),
+      activeProject: uuid(),
+      draftProject: uuid(),
+      latestGranted: uuid(),
+      previousGranted: uuid(),
+      latestDraft: uuid(),
+      previousDraft: uuid()
+    };
+
+    before(() => {
+      this.models = db.init();
+      allowed = allowedHelper({ db: this.models });
+    });
+
+    after(() => {
+      return this.models.destroy();
+    });
+
+    beforeEach(() => {
+
+      return db.clean(this.models)
+        .then(() => this.models.Establishment.query().insert([
+          {
+            id: 8201,
+            name: 'University of Croydon'
+          },
+          {
+            id: 8202,
+            name: 'Marvell Pharmaceutical'
+          }
+        ]))
+        .then(() => this.models.Profile.query().insert([
+          {
+            id: ids.licenceHolder,
+            firstName: 'Bruce',
+            lastName: 'Banner',
+            email: 'bruce@banner.com'
+          },
+          {
+            id: ids.profile,
+            firstName: 'Sterling',
+            lastName: 'Archer',
+            email: 'sterling@archer.com'
+          },
+          {
+            id: ids.basic,
+            firstName: 'Basic',
+            lastName: 'User',
+            email: 'basic@user.com'
+          }
+        ]))
+        .then(() => this.models.Project.query().insert([
+          {
+            id: ids.activeProject,
+            status: 'active',
+            establishmentId: 8201,
+            licenceHolderId: ids.licenceHolder
+          },
+          {
+            id: ids.draftProject,
+            status: 'inactive',
+            establishmentId: 8201,
+            licenceHolderId: ids.licenceHolder
+          }
+        ]))
+        .then(() => this.models.ProjectVersion.query().insert([
+          {
+            id: ids.latestGranted,
+            status: 'granted',
+            projectId: ids.activeProject,
+            createdAt: moment().toISOString(),
+            updatedAt: moment().toISOString()
+          },
+          {
+            id: ids.previousGranted,
+            status: 'granted',
+            projectId: ids.activeProject,
+            createdAt: moment().subtract(5, 'minutes').toISOString(),
+            updatedAt: moment().subtract(5, 'minutes').toISOString()
+          },
+          {
+            id: ids.latestDraft,
+            status: 'draft',
+            projectId: ids.draftProject,
+            createdAt: moment().toISOString(),
+            updatedAt: moment().toISOString()
+          },
+          {
+            id: ids.previousDraft,
+            status: 'draft',
+            projectId: ids.draftProject,
+            createdAt: moment().subtract(5, 'minutes').toISOString(),
+            updatedAt: moment().subtract(5, 'minutes').toISOString()
+          }
+        ]))
+        .then(() => this.models.Permission.query().insert([
+          {
+            establishmentId: 8201,
+            profileId: ids.licenceHolder,
+            role: 'basic'
+          },
+          {
+            establishmentId: 8202,
+            profileId: ids.profile,
+            role: 'admin'
+          },
+          {
+            establishmentId: 8202,
+            profileId: ids.basic,
+            role: 'basic'
+          }
+        ]).returning('*'))
+        .then(() => this.models.ProjectEstablishment.query().insert([
+          {
+            projectId: ids.activeProject,
+            establishmentId: 8202,
+            status: 'active'
+          },
+          {
+            projectId: ids.draftProject,
+            establishmentId: 8202,
+            status: 'draft'
+          }
+        ]));
+    });
+
+    describe('as admin user at additional establishment', () => {
+      it('can view a project if has additional availability', () => {
+        const params = {
+          model: 'project',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            projectId: ids.activeProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'admin'
+              }
+            ]
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, true);
+          });
+      });
+
+      it('cannot view a project if not admin', () => {
+        const params = {
+          model: 'project',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            projectId: ids.activeProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
+
+      it('can view latest granted version if has active additional availability', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            versionId: ids.latestGranted,
+            establishment: 8202,
+            projectId: ids.activeProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'admin'
+              }
+            ]
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, true);
+          });
+      });
+
+      it('cannot view previous granted version if has active additional availability', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            versionId: ids.previousGranted,
+            establishment: 8202,
+            projectId: ids.activeProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'admin'
+              }
+            ]
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
+
+      it('can view latest draft version if has draft additional availability for draft project', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            versionId: ids.latestDraft,
+            establishment: 8202,
+            projectId: ids.draftProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'admin'
+              }
+            ]
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, true);
+          });
+      });
+
+      it('cannot view previous draft version if has draft additional availability for draft project', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            versionId: ids.previousDraft,
+            establishment: 8202,
+            projectId: ids.draftProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'admin'
+              }
+            ]
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
+
+      it('can view given granted version if has removed additional availability for granted project', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            versionId: ids.previousGranted,
+            establishment: 8202,
+            projectId: ids.activeProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'admin'
+              }
+            ]
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectEstablishment.query().where({ projectId: ids.activeProject, establishmentId: 8202 }).patch({ status: 'removed', versionId: ids.previousGranted }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, true);
+          });
+      });
+
+      it('cannot view latest granted version if has removed additional availability for granted project', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            versionId: ids.latestGranted,
+            establishment: 8202,
+            projectId: ids.activeProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'admin'
+              }
+            ]
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectEstablishment.query().where({ projectId: ids.activeProject, establishmentId: 8202 }).patch({ status: 'removed', versionId: ids.previousGranted }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
+    });
+
+    describe('as collaborator at additional establishment', () => {
+      it('can view a project with additional availability', () => {
+        const params = {
+          model: 'project',
+          permissions: ['project:collaborator'],
+          subject: {
+            projectId: ids.activeProject,
+            establishment: 8202
+          },
+          user: {
+            id: ids.basic,
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        }
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.activeProject }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, true);
+          });
+      });
+
+      it('cannot view a project with additional availability if not a collaborator', () => {
+        const params = {
+          model: 'project',
+          permissions: ['project:collaborator'],
+          subject: {
+            projectId: ids.activeProject,
+            establishment: 8202
+          },
+          user: {
+            id: ids.basic,
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        }
+
+        return Promise.resolve()
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
+
+      it('can view a latest granted version of active project with active availability', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['projectVersion:collaborator'],
+          subject: {
+            projectId: ids.activeProject,
+            versionId: ids.latestGranted,
+            establishment: 8202
+          },
+          user: {
+            id: ids.basic,
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        }
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.activeProject }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, true);
+          });
+      });
+
+      it('cannot view a previous granted version of active project with active availability', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['projectVersion:collaborator'],
+          subject: {
+            projectId: ids.activeProject,
+            versionId: ids.previousGranted,
+            establishment: 8202
+          },
+          user: {
+            id: ids.basic,
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        }
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.activeProject }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
+
+      it('can view a the latest version of draft project with draft availability', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['projectVersion:collaborator'],
+          subject: {
+            projectId: ids.draftProject,
+            versionId: ids.latestDraft,
+            establishment: 8202
+          },
+          user: {
+            id: ids.basic,
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        }
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.draftProject }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, true);
+          });
+      });
+
+      it('cannot view a previous version of draft project with draft availability', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['projectVersion:collaborator'],
+          subject: {
+            projectId: ids.draftProject,
+            versionId: ids.previousDraft,
+            establishment: 8202
+          },
+          user: {
+            id: ids.basic,
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        }
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.draftProject }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
+
+      it('can view the specifed version of a project with removed availability', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['projectVersion:collaborator'],
+          subject: {
+            projectId: ids.activeProject,
+            versionId: ids.previousGranted,
+            establishment: 8202
+          },
+          user: {
+            id: ids.basic,
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        }
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectEstablishment.query().where({ establishmentId: 8202, projectId: ids.activeProject }).patch({ status: 'removed', versionId: ids.previousGranted }))
+          .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.activeProject }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, true);
+          });
+      });
+
+      it('cannot view the latest version of a project with removed availability', () => {
+        const params = {
+          model: 'projectVersion',
+          permissions: ['projectVersion:collaborator'],
+          subject: {
+            projectId: ids.activeProject,
+            versionId: ids.latestGranted,
+            establishment: 8202
+          },
+          user: {
+            id: ids.basic,
+            establishments: [
+              {
+                id: 8202,
+                role: 'basic'
+              }
+            ]
+          }
+        }
+
+        return Promise.resolve()
+          .then(() => this.models.ProjectEstablishment.query().where({ establishmentId: 8202, projectId: ids.activeProject }).patch({ status: 'removed', versionId: ids.previousGranted }))
+          .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.activeProject }))
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
     });
   });
 
