@@ -3,7 +3,7 @@ const uuid = require('uuid/v4');
 const assert = require('assert');
 const sinon = require('sinon');
 const allowedHelper = require('../lib/utils/allowed');
-const db = require('./helpers/db')
+const db = require('./helpers/db');
 
 describe('allowed', () => {
 
@@ -788,7 +788,7 @@ describe('allowed', () => {
               }
             ]
           }
-        }
+        };
 
         return Promise.resolve()
           .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.activeProject }))
@@ -815,7 +815,7 @@ describe('allowed', () => {
               }
             ]
           }
-        }
+        };
 
         return Promise.resolve()
           .then(() => allowed(params))
@@ -842,7 +842,7 @@ describe('allowed', () => {
               }
             ]
           }
-        }
+        };
 
         return Promise.resolve()
           .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.activeProject }))
@@ -870,7 +870,7 @@ describe('allowed', () => {
               }
             ]
           }
-        }
+        };
 
         return Promise.resolve()
           .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.activeProject }))
@@ -898,7 +898,7 @@ describe('allowed', () => {
               }
             ]
           }
-        }
+        };
 
         return Promise.resolve()
           .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.draftProject }))
@@ -926,7 +926,7 @@ describe('allowed', () => {
               }
             ]
           }
-        }
+        };
 
         return Promise.resolve()
           .then(() => this.models.ProjectProfile.query().insert({ profileId: ids.basic, projectId: ids.draftProject }))
@@ -954,7 +954,7 @@ describe('allowed', () => {
               }
             ]
           }
-        }
+        };
 
         return Promise.resolve()
           .then(() => this.models.ProjectEstablishment.query().where({ establishmentId: 8202, projectId: ids.activeProject }).patch({ status: 'removed', versionId: ids.previousGranted }))
@@ -983,7 +983,7 @@ describe('allowed', () => {
               }
             ]
           }
-        }
+        };
 
         return Promise.resolve()
           .then(() => this.models.ProjectEstablishment.query().where({ establishmentId: 8202, projectId: ids.activeProject }).patch({ status: 'removed', versionId: ids.previousGranted }))
