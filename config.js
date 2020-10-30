@@ -68,8 +68,9 @@ module.exports = {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*'],
-        single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'project:collaborator']
+        single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'additionalEstablishment:admin', 'project:own', 'project:collaborator']
       },
+      manageAccess: ['holdingEstablishment:admin', 'project:own', 'asru:licensing', 'additionalEstablishment:admin'],
       transfer: ['project:own'],
       import: ['establishment:*'],
       create: ['profile:own', 'establishment:admin'],
@@ -84,7 +85,7 @@ module.exports = {
       relatedTasks: ['holdingEstablishment:admin', 'project:own', 'asru:*']
     },
     projectVersion: {
-      read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'receivingEstablishment:admin', 'project:collaborator']
+      read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'additionalEstablishment:admin', 'receivingEstablishment:admin', 'projectVersion:collaborator']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
