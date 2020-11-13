@@ -71,7 +71,7 @@ module.exports = {
         single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'additionalEstablishment:admin', 'project:own', 'project:collaborator']
       },
       manageAccess: ['holdingEstablishment:admin', 'project:own', 'asru:licensing', 'additionalEstablishment:admin'],
-      transfer: ['project:own'],
+      transfer: ['project:own', 'asru:licensing'],
       import: ['establishment:*'],
       create: ['profile:own', 'establishment:admin'],
       update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
