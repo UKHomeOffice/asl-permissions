@@ -49,7 +49,8 @@ describe('allowed', () => {
       params = {
         permissions: ['pil:own'],
         user: {
-          id: USER_ID
+          id: USER_ID,
+          emailConfirmed: true
         },
         subject: {
           pilId: PIL_ID
@@ -114,7 +115,8 @@ describe('allowed', () => {
       const params = {
         permissions: ['project:own'],
         user: {
-          id: USER_ID
+          id: USER_ID,
+          emailConfirmed: true
         },
         subject: {
           projectId: PROJECT_ID
@@ -133,7 +135,8 @@ describe('allowed', () => {
       const params = {
         permissions: ['project:own'],
         user: {
-          id: USER_ID
+          id: USER_ID,
+          emailConfirmed: true
         },
         subject: {
           id: PROJECT_ID
@@ -152,7 +155,8 @@ describe('allowed', () => {
       const params = {
         permissions: ['project:own'],
         user: {
-          id: USER_ID
+          id: USER_ID,
+          emailConfirmed: true
         },
         subject: {
           projectId: PROJECT_ID
@@ -215,7 +219,8 @@ describe('allowed', () => {
               id: 8202,
               role: 'basic'
             }
-          ]
+          ],
+          emailConfirmed: true
         }
       };
     });
@@ -379,7 +384,8 @@ describe('allowed', () => {
         },
         permissions: ['project:collaborator'],
         user: {
-          id: userId
+          id: userId,
+          emailConfirmed: true
         }
       };
       return Promise.resolve()
@@ -400,7 +406,8 @@ describe('allowed', () => {
           id: uuid()
         },
         user: {
-          id: userId
+          id: userId,
+          emailConfirmed: true
         }
       };
       return Promise.resolve()
@@ -421,7 +428,8 @@ describe('allowed', () => {
           id: uuid()
         },
         user: {
-          id: userId
+          id: userId,
+          emailConfirmed: true
         }
       };
       return Promise.resolve()
@@ -576,7 +584,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'admin'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -600,7 +609,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -626,7 +636,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'admin'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -652,7 +663,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'admin'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -678,7 +690,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'admin'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -704,7 +717,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'admin'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -730,7 +744,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'admin'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -757,7 +772,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'admin'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -786,7 +802,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -813,7 +830,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -840,7 +858,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -868,7 +887,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -896,7 +916,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -924,7 +945,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -952,7 +974,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -981,7 +1004,8 @@ describe('allowed', () => {
                 id: 8202,
                 role: 'basic'
               }
-            ]
+            ],
+            emailConfirmed: true
           }
         };
 
@@ -1025,7 +1049,8 @@ describe('allowed', () => {
               id: 8202,
               role: 'admin'
             }
-          ]
+          ],
+          emailConfirmed: true
         }
       };
     });
@@ -1078,7 +1103,8 @@ describe('allowed', () => {
       params = {
         permissions: ['pil:own'],
         user: {
-          id: USER_ID
+          id: USER_ID,
+          emailConfirmed: true
         },
         subject: {
           pilId: PIL_ID
