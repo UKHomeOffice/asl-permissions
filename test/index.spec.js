@@ -50,7 +50,8 @@ describe('API', () => {
             id: 100,
             role: 'admin'
           }
-        ]
+        ],
+        emailConfirmed: true
       });
     });
 
@@ -97,7 +98,8 @@ describe('API', () => {
             id: 100,
             role: 'basic'
           }
-        ]
+        ],
+        emailConfirmed: true
       });
     });
 
@@ -130,7 +132,8 @@ describe('API', () => {
             id: 101,
             role: 'basic'
           }
-        ]
+        ],
+        emailConfirmed: true
       });
     });
 
@@ -166,7 +169,10 @@ describe('API', () => {
       });
 
       this.app = User(this.api, { id });
-      stubProfile(this.api.db.Profile, { id });
+      stubProfile(this.api.db.Profile, {
+        id,
+        emailConfirmed: true
+      });
     });
 
     it('allows if own profile', () => {
@@ -213,7 +219,8 @@ describe('API', () => {
               establishmentId: 102,
               type: 'ntco'
             }
-          ]
+          ],
+          emailConfirmed: true
         });
       });
 
@@ -253,7 +260,8 @@ describe('API', () => {
               establishmentId: 100,
               type: 'nio'
             }
-          ]
+          ],
+          emailConfirmed: true
         });
       });
 
@@ -281,7 +289,8 @@ describe('API', () => {
               establishmentId: 100,
               type: 'holc'
             }
-          ]
+          ],
+          emailConfirmed: true
         });
       });
 
@@ -305,7 +314,8 @@ describe('API', () => {
         asruInspector: true,
         asruLicensing: false,
         asruAdmin: false,
-        asruSupport: false
+        asruSupport: false,
+        emailConfirmed: true
       });
     });
 
@@ -360,7 +370,8 @@ describe('API', () => {
             id: 100,
             role: 'basic'
           }
-        ]
+        ],
+        emailConfirmed: true
       });
       return supertest(this.app)
         .get('/')
@@ -388,7 +399,8 @@ describe('API', () => {
             id: 102,
             role: 'readonly'
           }
-        ]
+        ],
+        emailConfirmed: true
       });
       return supertest(this.app)
         .get('/')
@@ -410,7 +422,8 @@ describe('API', () => {
             id: 100,
             role: 'basic'
           }
-        ]
+        ],
+        emailConfirmed: true
       });
       return supertest(this.app)
         .get('/')
@@ -425,6 +438,38 @@ describe('API', () => {
       return supertest(this.app)
         .get('/')
         .expect(400);
+    });
+  });
+
+  describe('when user has unconfirmed email', () => {
+
+    beforeEach(() => {
+      const user = { id: '100' };
+      this.app = User(this.api, user);
+      stubProfile(this.api.db.Profile, {
+        establishments: [
+          {
+            id: 100,
+            role: 'admin'
+          }
+        ],
+        emailConfirmed: false
+      });
+    });
+
+    it('returns false for specific tasks', () => {
+      return supertest(this.app)
+        .get('/')
+        .expect(200)
+        .expect(response => {
+          assert.deepEqual(response.body, {}, 'response contains no tasks');
+        });
+    });
+
+    it('returns no tasks in allowed actions', () => {
+      return supertest(this.app)
+        .get('/task1?establishment=100')
+        .expect(403);
     });
   });
 
