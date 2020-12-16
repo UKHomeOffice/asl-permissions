@@ -576,6 +576,7 @@ describe('allowed', () => {
           model: 'project',
           permissions: ['additionalEstablishment:admin'],
           subject: {
+            establishment: 8202,
             projectId: ids.activeProject
           },
           user: {
@@ -596,11 +597,38 @@ describe('allowed', () => {
           });
       });
 
+      it('cannot view a project if not scoped to the correct establishment', () => {
+        const params = {
+          model: 'project',
+          permissions: ['additionalEstablishment:admin'],
+          subject: {
+            establishment: 8201,
+            projectId: ids.activeProject
+          },
+          user: {
+            establishments: [
+              {
+                id: 8202,
+                role: 'admin'
+              }
+            ],
+            emailConfirmed: true
+          }
+        };
+
+        return Promise.resolve()
+          .then(() => allowed(params))
+          .then(isAllowed => {
+            assert.equal(isAllowed, false);
+          });
+      });
+
       it('cannot view a project if not admin', () => {
         const params = {
           model: 'project',
           permissions: ['additionalEstablishment:admin'],
           subject: {
+            establishment: 8202,
             projectId: ids.activeProject
           },
           user: {
