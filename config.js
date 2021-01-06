@@ -80,7 +80,7 @@ module.exports = {
       updateIssueDate: ['asru:licensing'],
       updateLicenceNumber: ['asru:licensing'],
       delete: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
-      revoke: ['asru:*', 'holdingEstablishment:admin', 'project:own'],
+      revoke: ['asru:licensing', 'holdingEstablishment:admin', 'project:own'],
       convertLegacy: ['asru:licensing'],
       relatedTasks: ['holdingEstablishment:admin', 'project:own', 'asru:*']
     },
