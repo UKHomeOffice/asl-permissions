@@ -68,7 +68,7 @@ module.exports = {
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read'],
         basic: ['asru:*', 'establishment:*'],
-        single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'additionalEstablishment:admin', 'project:own', 'project:collaborator']
+        single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'additionalEstablishment:admin', 'additionalEstablishment:read', 'project:own', 'project:collaborator']
       },
       manageAccess: ['holdingEstablishment:admin', 'project:own', 'asru:licensing', 'additionalEstablishment:admin'],
       transfer: ['project:own', 'asru:licensing'],
