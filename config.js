@@ -105,6 +105,6 @@ module.exports = {
     },
     asruProfile: ['*'],
     licenceFees: ['asru:*'],
-    asruReporting: ['asru:support']
+    asruReporting: ['asru:*']
   }
 };
