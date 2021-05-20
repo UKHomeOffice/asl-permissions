@@ -32,6 +32,7 @@ module.exports = {
       invite: ['establishment:admin', 'asru:*'],
       read: {
         all: ['asru:*', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
+        allCsv: ['asru:*', 'establishment:admin'],
         basic: ['asru:*', 'establishment:*']
       },
       global: ['asru:*', 'profile:own'],
