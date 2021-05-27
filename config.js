@@ -77,7 +77,8 @@ module.exports = {
       create: ['profile:own', 'establishment:admin'],
       update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
       rops: {
-        update: ['asru:licensing']
+        update: ['establishment:admin', 'project:own', 'asru:licensing'],
+        create: ['asru:licensing']
       },
       endorse: ['holdingEstablishment:admin'],
       updateConditions: ['asru:*'],
