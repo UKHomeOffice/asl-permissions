@@ -43,7 +43,7 @@ module.exports = {
       relatedTasks: ['asru:*', 'establishment:admin', 'profile:own']
     },
     training: {
-      read: ['asru:*', 'profile:own', 'establishment:admin', 'establishment:read', 'establishment:role:ntco'],
+      read: ['asru:*', 'profile:own', 'establishment:admin', 'establishment:read', 'establishment:role:ntco', 'project:collaborator:edit'],
       update: ['asru:*', 'profile:own', 'establishment:admin', 'establishment:role:ntco']
     },
     trainingCourse: {
@@ -75,7 +75,8 @@ module.exports = {
       transfer: ['project:own', 'asru:licensing'],
       import: ['establishment:*'],
       create: ['profile:own', 'establishment:admin'],
-      update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
+      update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing', 'project:collaborator:edit'],
+      submit: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
       rops: {
         update: ['establishment:admin', 'project:own', 'asru:licensing'],
         create: ['asru:licensing']
