@@ -79,6 +79,7 @@ module.exports = {
       submit: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
       rops: {
         update: ['establishment:admin', 'project:own', 'asru:licensing', 'project:collaborator:edit'],
+        submit: ['establishment:admin', 'project:own', 'asru:licensing'],
         create: ['asru:licensing']
       },
       endorse: ['holdingEstablishment:admin'],
