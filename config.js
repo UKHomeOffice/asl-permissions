@@ -71,24 +71,24 @@ module.exports = {
         basic: ['asru:*', 'establishment:*'],
         single: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'additionalEstablishment:admin', 'additionalEstablishment:read', 'project:own', 'project:collaborator']
       },
-      manageAccess: ['holdingEstablishment:admin', 'project:own', 'asru:licensing', 'additionalEstablishment:admin'],
-      transfer: ['project:own', 'asru:licensing'],
+      manageAccess: ['holdingEstablishment:admin', 'project:own', 'asru:inspector', 'additionalEstablishment:admin'],
+      transfer: ['project:own', 'asru:inspector'],
       import: ['establishment:*'],
       create: ['profile:own', 'establishment:admin'],
-      update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing', 'project:collaborator:edit'],
-      submit: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
+      update: ['holdingEstablishment:admin', 'project:own', 'asru:inspector', 'project:collaborator:edit'],
+      submit: ['holdingEstablishment:admin', 'project:own', 'asru:inspector'],
       rops: {
-        update: ['establishment:admin', 'project:own', 'asru:licensing', 'project:collaborator:edit'],
-        submit: ['establishment:admin', 'project:own', 'asru:licensing'],
-        create: ['asru:licensing']
+        update: ['establishment:admin', 'project:own', 'asru:inspector', 'project:collaborator:edit'],
+        submit: ['establishment:admin', 'project:own', 'asru:inspector'],
+        create: ['asru:inspector']
       },
       endorse: ['holdingEstablishment:admin'],
       updateConditions: ['asru:*'],
-      updateIssueDate: ['asru:licensing'],
-      updateLicenceNumber: ['asru:licensing'],
-      delete: ['holdingEstablishment:admin', 'project:own', 'asru:licensing'],
-      revoke: ['asru:licensing', 'holdingEstablishment:admin', 'project:own'],
-      convertLegacy: ['asru:licensing'],
+      updateIssueDate: ['asru:inspector'],
+      updateLicenceNumber: ['asru:inspector'],
+      delete: ['holdingEstablishment:admin', 'project:own', 'asru:inspector'],
+      revoke: ['asru:inspector', 'holdingEstablishment:admin', 'project:own'],
+      convertLegacy: ['asru:inspector'],
       relatedTasks: ['holdingEstablishment:admin', 'project:own', 'asru:*']
     },
     projectVersion: {
@@ -96,8 +96,8 @@ module.exports = {
     },
     retrospectiveAssessment: {
       read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'additionalEstablishment:admin', 'additionalEstablishment:read', 'receivingEstablishment:admin', 'projectVersion:collaborator'],
-      update: ['holdingEstablishment:admin', 'project:own', 'asru:licensing', 'project:collaborator:edit'],
-      submit: ['holdingEstablishment:admin', 'project:own', 'asru:licensing']
+      update: ['holdingEstablishment:admin', 'project:own', 'asru:inspector', 'project:collaborator:edit'],
+      submit: ['holdingEstablishment:admin', 'project:own', 'asru:inspector']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
@@ -109,7 +109,7 @@ module.exports = {
       licenceFees: ['establishment:admin', 'asru:*'],
       rops: ['asru:*'],
       sharedKey: ['asru:*'],
-      revoke: ['asru:licensing'],
+      revoke: ['asru:inspector'],
       relatedTasks: ['asru:*', 'establishment:admin']
     },
     asruProfile: ['*'],
