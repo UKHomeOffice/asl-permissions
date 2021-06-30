@@ -88,7 +88,11 @@ module.exports = {
       updateLicenceNumber: ['asru:inspector'],
       delete: ['holdingEstablishment:admin', 'project:own', 'asru:inspector'],
       revoke: ['asru:inspector', 'holdingEstablishment:admin', 'project:own'],
-      convertLegacy: ['asru:inspector'],
+      stub: {
+        create: ['asru:*'],
+        update: ['asru:*'],
+        convert: ['asru:inspector']
+      },
       relatedTasks: ['holdingEstablishment:admin', 'project:own', 'asru:*']
     },
     projectVersion: {
