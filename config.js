@@ -93,7 +93,8 @@ module.exports = {
         update: ['asru:*'],
         convert: ['asru:inspector']
       },
-      relatedTasks: ['holdingEstablishment:admin', 'project:own', 'asru:*']
+      relatedTasks: ['holdingEstablishment:admin', 'project:own', 'asru:*'],
+      recoverTask: ['asru:admin']
     },
     projectVersion: {
       read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'additionalEstablishment:admin', 'additionalEstablishment:read', 'receivingEstablishment:admin', 'projectVersion:collaborator']
