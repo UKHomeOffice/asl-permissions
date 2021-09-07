@@ -78,8 +78,8 @@ module.exports = {
       update: ['holdingEstablishment:admin', 'project:own', 'asru:inspector', 'project:collaborator:edit'],
       submit: ['holdingEstablishment:admin', 'project:own', 'asru:inspector'],
       rops: {
-        update: ['establishment:admin', 'project:own', 'asru:inspector', 'project:collaborator:edit'],
-        submit: ['establishment:admin', 'project:own', 'asru:inspector'],
+        update: ['establishment:admin', 'project:own', 'asru:inspector', 'asru:rops', 'project:collaborator:edit'],
+        submit: ['establishment:admin', 'project:own', 'asru:inspector', 'asru:rops'],
         create: ['asru:inspector']
       },
       endorse: ['holdingEstablishment:admin'],
