@@ -80,7 +80,7 @@ module.exports = {
       rops: {
         update: ['establishment:admin', 'project:own', 'asru:inspector', 'asru:rops', 'project:collaborator:edit'],
         submit: ['establishment:admin', 'project:own', 'asru:inspector', 'asru:rops'],
-        create: ['asru:inspector']
+        create: ['establishment:admin', 'project:own', 'asru:inspector', 'project:collaborator:edit']
       },
       endorse: ['holdingEstablishment:admin'],
       updateConditions: ['asru:*'],
