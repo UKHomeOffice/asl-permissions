@@ -112,7 +112,7 @@ module.exports = {
       updateConditions: ['asru:*'],
       create: ['asru:*'],
       licenceFees: ['establishment:admin', 'asru:*'],
-      rops: ['asru:*'],
+      rops: ['asru:*', 'establishment:admin'],
       sharedKey: ['asru:*'],
       revoke: ['asru:inspector'],
       relatedTasks: ['asru:*', 'establishment:admin']
