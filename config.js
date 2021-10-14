@@ -101,8 +101,8 @@ module.exports = {
     },
     retrospectiveAssessment: {
       read: ['asru:*', 'holdingEstablishment:admin', 'holdingEstablishment:read', 'project:own', 'additionalEstablishment:admin', 'additionalEstablishment:read', 'receivingEstablishment:admin', 'projectVersion:collaborator'],
-      update: ['holdingEstablishment:admin', 'project:own', 'asru:inspector', 'project:collaborator:edit'],
-      submit: ['holdingEstablishment:admin', 'project:own', 'asru:inspector']
+      update: ['holdingEstablishment:admin', 'project:own', 'project:collaborator:edit'],
+      submit: ['holdingEstablishment:admin', 'project:own']
     },
     establishment: {
       read: ['asru:*', 'establishment:*'],
