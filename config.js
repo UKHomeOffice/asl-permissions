@@ -121,6 +121,7 @@ module.exports = {
     asruProfile: ['*'],
     licenceFees: ['asru:*'],
     asruReporting: ['asru:*'],
-    asruRops: ['asru:rops']
+    asruRops: ['asru:rops'],
+    enforcement: ['asru:*']
   }
 };
