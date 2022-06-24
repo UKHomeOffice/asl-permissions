@@ -38,6 +38,7 @@ module.exports = {
       global: ['asru:*', 'profile:own'],
       update: ['profile:own'],
       alerts: ['profile:own'],
+      reminders: ['profile:own'],
       permissions: ['asru:*', 'establishment:admin'],
       removePermissions: ['asru:*', 'establishment:admin', 'profile:own'],
       roles: ['asru:*', 'establishment:admin'],
