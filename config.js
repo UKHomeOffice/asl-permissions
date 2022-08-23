@@ -63,6 +63,8 @@ module.exports = {
       delete: ['pil:own', 'holdingEstablishment:admin'],
       review: ['establishment:role:ntco'],
       transfer: ['pil:own', 'asru:*'],
+      revoke: ['pil:own', 'holdingEstablishment:admin', 'asru:*'],
+      suspend: ['asru:inspector'],
       updateConditions: ['asru:*'],
       updateBillable: ['asru:support'],
       relatedTasks: ['profile:own', 'holdingEstablishment:admin', 'asru:*']
@@ -90,6 +92,7 @@ module.exports = {
       updateLicenceNumber: ['asru:inspector'],
       delete: ['holdingEstablishment:admin', 'project:own', 'asru:inspector'],
       revoke: ['asru:inspector', 'holdingEstablishment:admin', 'project:own'],
+      suspend: ['asru:inspector'],
       stub: {
         create: ['asru:*'],
         update: ['asru:*'],
@@ -117,6 +120,7 @@ module.exports = {
       rops: ['asru:*', 'establishment:admin'],
       sharedKey: ['asru:*'],
       revoke: ['asru:inspector'],
+      suspend: ['asru:inspector'],
       relatedTasks: ['asru:*', 'establishment:admin']
     },
     asruProfile: ['*'],
