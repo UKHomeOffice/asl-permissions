@@ -25,9 +25,9 @@
   },
   "homepage": "https://github.com/UKHomeOffice/asl-permissions#readme",
   "dependencies": {
-    "@asl/constants": "0.0.1",
-    "@asl/schema": "^10.13.0",
-    "@asl/service": "^8.8.4",
+    "@asl/constants": "^1.2.2",
+    "@asl/schema": "^10.16.0",
+    "@asl/service": "^9.2.0",
     "apicache": "^1.6.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.2",
