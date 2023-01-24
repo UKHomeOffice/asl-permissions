@@ -36,7 +36,7 @@
     "uuid": "^7.0.3"
   },
   "devDependencies": {
-    "audit-ci": "^4.2.0",
+    "audit-ci": "^6.5.0",
     "dotenv": "^6.0.0",
     "eslint": "^5.16.0",
     "eslint-config-lennym": "^2.0.1",
