@@ -2,7 +2,7 @@ const assert = require('assert');
 
 const { get } = require('lodash');
 const { permissions } = require('../config');
-const { externalPermissions, roles } = require('@asl/constants');
+const { externalPermissions, roles } = require('@ukhomeoffice/asl-constants');
 const { traverse } = require('../lib/utils');
 
 describe('Task configuration', () => {
