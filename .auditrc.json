@@ -1,17 +1,12 @@
 {
   "comments": [
-    "GHSA-67hx-6x53-jw92|@asl/service>babel-plugin-transform-class-properties>babel-helper-function-name>babel-traverse",
-    "GHSA-67hx-6x53-jw92|@ukhomeoffice/asl-components>babel-plugin-transform-class-properties>babel-helper-function-name>babel-traverse>",
-    "GHSA-67hx-6x53-jw92|babel-template>babel-traverse>",
-    "GHSA-grv7-fg5c-xmjg|@asl/schema>knex>liftoff>findup-sync>micromatch>braces",
-    "GHSA-grv7-fg5c-xmjg|objection>knex>liftoff>findup-sync>micromatch>braces",
-    "GHSA-4jv9-3563-23j3|knex",
-    "GHSA-4jv9-3563-23j3|@asl/schema>knex",
-    "GHSA-4jv9-3563-23j3|objection>knex"
+    "GHSA-c2qf-rxjj-qqgw: semver vulnerable to Regular Expression Denial of Service",
+    "GHSA-59fq-727j-hm3f: keycloak-connect contains Open redirect vulnerability in the Node.js adapter",
+    "GHSA-3xgq-45jj-v275: Regular Expression Denial of Service (ReDoS) in cross-spawn"
   ],
   "allowlist": [
-    "GHSA-67hx-6x53-jw92",
-    "GHSA-grv7-fg5c-xmjg",
-    "GHSA-4jv9-3563-23j3"
+    "GHSA-c2qf-rxjj-qqgw",
+    "GHSA-59fq-727j-hm3f",
+    "GHSA-3xgq-45jj-v275"
   ]
 }
