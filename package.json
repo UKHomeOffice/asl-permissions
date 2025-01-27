@@ -11,7 +11,7 @@
     "test": "npm run test:lint && npm run test:unit",
     "test:audit": "audit-ci --high --skip-dev --config .auditrc.json",
     "test:lint": "eslint .",
-    "test:unit": "mocha --recursive --exit"
+    "test:unit": "mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -25,8 +25,9 @@
   },
   "homepage": "https://github.com/UKHomeOffice/asl-permissions#readme",
   "dependencies": {
-    "@asl/service": "10.5.3",
     "@ukhomeoffice/asl-constants": "2.2.0",
+    "@asl/schema": "11.0.0",
+    "@asl/service": "10.5.3",
     "apicache": "^1.6.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.2",
