@@ -8,7 +8,7 @@ const User = require('./helpers/user-wrapper.js');
 const stubProfile = (Profile, response) => {
   const q = {
     where: () => q,
-    eager: () => Promise.resolve([response])
+    withGraphFetched: () => Promise.resolve([response])
   };
   sinon.stub(Profile, 'query').returns(q);
 };
