@@ -1,6 +1,6 @@
 {
   "name": "asl-permissions",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "test": "npm run test:lint && npm run test:unit",
     "test:audit": "audit-ci --high --skip-dev --config .auditrc.json",
     "test:lint": "eslint .",
-    "test:unit": "mocha --recursive"
+    "test:unit": "mocha --recursive --exit"
   },
   "repository": {
     "type": "git",
@@ -25,9 +25,8 @@
   },
   "homepage": "https://github.com/UKHomeOffice/asl-permissions#readme",
   "dependencies": {
-    "@ukhomeoffice/asl-constants": "2.2.0",
-    "@asl/schema": "11.0.0",
     "@asl/service": "10.5.3",
+    "@ukhomeoffice/asl-constants": "2.2.0",
     "apicache": "^1.6.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.2",
@@ -36,10 +35,10 @@
     "uuid": "^7.0.3"
   },
   "devDependencies": {
+    "@ukhomeoffice/eslint-config-asl": "^3.0.0",
     "audit-ci": "^6.5.0",
     "dotenv": "^6.0.0",
     "eslint": "^5.16.0",
-    "@ukhomeoffice/eslint-config-asl": "^3.0.0",
     "eslint-plugin-undocumented-env": "^1.0.0",
     "express": "^4.18.2",
     "knex": "^3.1.0",
