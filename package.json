@@ -1,6 +1,6 @@
 {
   "name": "asl-permissions",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -26,8 +26,8 @@
   "homepage": "https://github.com/UKHomeOffice/asl-permissions#readme",
   "dependencies": {
     "@ukhomeoffice/asl-constants": "2.2.0",
-    "@asl/schema": "11.0.0",
-    "@asl/service": "11.0.1",
+    "@asl/schema": "11.1.4",
+    "@asl/service": "11.0.2",
     "apicache": "^1.6.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.2",
